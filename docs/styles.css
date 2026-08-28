@@ -127,6 +127,7 @@ h1 span { color: var(--accent); }
 .callout p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
 
 .about-contact { margin: 0; font-size: 13.5px; color: var(--label); line-height: 1.5; }
+.about-logo { display: block; margin: 6px auto 0; max-width: 180px; width: 60%; height: auto; }
 
 /* Link-Buttons */
 .linkrow-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
