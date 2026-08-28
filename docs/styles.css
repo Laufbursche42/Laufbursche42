@@ -1,0 +1,143 @@
+/* Profilseite Laufbursche42. Palette und Theme-Mechanik 1:1 aus der Laufbursche Edition Vorlage (sf-unlock).
+   Dark ist Voreinstellung; das helle Set wird per data-theme am <html> eingeschaltet. */
+:root {
+  --bg: #0A0C10; --card: #111420; --line: #1C2035; --text: #E4EDF6; --label: #C6D2E2;
+  --muted: #8A93A8; --accent: #B8F020; --value: #BCEB39; --good: #1EE89A; --bad: #FF5050;
+  --warn: #FFAA18; --gps: #3DB8FF; --mono: ui-monospace, Consolas, monospace;
+  --scroll: #2B3350; --field: #0d1018; --chip: #171b2a; --on-accent: #0A0C10;
+  color-scheme: dark;
+  --backdrop: rgba(0,0,0,.72); --shadow: rgba(0,0,0,.5);
+}
+[data-theme="light"] {
+  --bg: #E8EDF5; --card: #FFFFFF; --line: #CDD5E4; --text: #0A0D18; --label: #0A0D18;
+  --muted: #4A5468;
+  --accent: #2A6A00; --value: #2A6A00; --good: #1B7A4B; --bad: #CC2020;
+  --warn: #A05800; --gps: #005AA0;
+  --scroll: #B6C0D4; --field: #FFFFFF; --chip: #F1F4FA; --on-accent: #FFFFFF;
+  color-scheme: light;
+  --backdrop: rgba(10,13,24,.45); --shadow: rgba(10,13,24,.18);
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+* { scrollbar-width: thin; scrollbar-color: var(--scroll) transparent; }
+@supports not (scrollbar-width: thin) {
+  ::-webkit-scrollbar { width: 11px; height: 11px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb {
+    background: var(--scroll); border-radius: 11px;
+    border: 3px solid transparent; background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--muted); background-clip: content-box; }
+  ::-webkit-scrollbar-corner { background: transparent; }
+}
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif; line-height: 1.5;
+  padding: max(14px, env(safe-area-inset-top)) 14px 40px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+
+header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+h1 { font-size: 22px; margin: 0; letter-spacing: .01em; line-height: 1.2; }
+h1 span { color: var(--accent); }
+
+.head-tools { display: flex; align-items: center; gap: 8px; }
+.langs { display: flex; gap: 4px; }
+.langs button { flex: 0 0 auto; padding: 5px 8px; font-family: var(--mono); font-size: 11px;
+  font-weight: 700; letter-spacing: .06em; background: transparent; color: var(--muted);
+  border-radius: 6px; border: 1px solid var(--line); cursor: pointer; }
+.langs button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.theme-btn { flex: 0 0 auto; width: 32px; height: 28px; padding: 0; line-height: 1; cursor: pointer;
+  background: transparent; border: 1px solid var(--line); border-radius: 6px; color: var(--label); font-size: 15px; }
+.theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Zwei Spalten: links Repos (schmaler), rechts über mich. Auf schmalen Schirmen gestapelt. */
+.layout { display: grid; grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr); gap: 16px; align-items: start; }
+@media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
+.col { display: flex; flex-direction: column; gap: 16px; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
+  display: flex; flex-direction: column; gap: 12px; box-shadow: 0 1px 3px var(--shadow); }
+.card h2 { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  margin: 0; font-weight: 700; }
+.card-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.count { font-family: var(--mono); font-size: 12px; color: var(--accent); }
+.hint { color: var(--muted); font-size: 13px; margin: 0; }
+.hint a, p a { color: var(--accent); text-decoration: none; }
+.hint a:hover, p a:hover { text-decoration: underline; }
+
+/* Repo-Liste */
+.repo-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.repo-loading { color: var(--muted); font-size: 13px; padding: 6px 2px; }
+.repo {
+  position: relative; color: inherit;
+  background: var(--field); border: 1px solid var(--line); border-radius: 10px;
+  padding: 11px 13px; transition: border-color .12s ease;
+}
+.repo:hover { border-color: var(--accent); }
+.repo-top { display: flex; align-items: center; gap: 8px; }
+.repo-name { font-weight: 700; font-size: 14.5px; color: var(--text); word-break: break-word;
+  text-decoration: none; }
+/* Overlay-Link: macht die ganze Karte klickbar (führt zum Repo). */
+.repo-name::after { content: ""; position: absolute; inset: 0; border-radius: 10px; }
+.repo:hover .repo-name { color: var(--accent); }
+.repo-star { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted);
+  white-space: nowrap; position: relative; }
+.repo-desc { color: var(--muted); font-size: 12.5px; margin: 4px 0 0; }
+.repo-meta { display: flex; align-items: center; gap: 6px; margin-top: 9px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gps); flex: 0 0 auto; }
+.repo-lang { font-size: 11.5px; color: var(--muted); font-family: var(--mono); }
+/* Neues-Issue-Link liegt über dem Overlay (z-index) und ist separat klickbar. */
+.repo-issue { position: relative; z-index: 1; margin-left: auto; font-size: 11.5px;
+  font-family: var(--mono); color: var(--muted); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; background: var(--chip);
+  white-space: nowrap; transition: color .12s ease, border-color .12s ease; }
+.repo-issue:hover { color: var(--accent); border-color: var(--accent); }
+
+/* Über-mich Karte */
+.about { gap: 16px; }
+.about-head { display: flex; align-items: center; gap: 14px; }
+.avatar { border-radius: 50%; border: 2px solid var(--accent); background: var(--chip); flex: 0 0 auto; }
+.about-head h2 { margin: 0 0 6px; }
+.about-intro { margin: 0; font-size: 14px; color: var(--label); line-height: 1.5; }
+
+.about-block { display: flex; flex-direction: column; gap: 9px; }
+.sub { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  margin: 0; font-weight: 700; }
+
+/* Liste "Womit ich mich beschäftige" mit Akzent-Marker. */
+.do-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.do-list li { position: relative; padding-left: 18px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.do-list li::before { content: ""; position: absolute; left: 0; top: .5em; width: 7px; height: 7px;
+  border-radius: 2px; background: var(--accent); }
+.do-list b { color: var(--text); font-weight: 700; }
+
+/* Marken als Chips. */
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip { font-size: 12px; font-family: var(--mono); color: var(--label); background: var(--field);
+  border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px; }
+.chip-more { color: var(--muted); border-style: dashed; }
+
+/* Datenschutz-Kasten, dezent mit Akzent-Kante. */
+.callout { background: var(--field); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border-radius: 10px; padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.callout-t { margin: 0; font-size: 11px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); font-weight: 700; }
+.callout p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+.about-contact { margin: 0; font-size: 13.5px; color: var(--label); line-height: 1.5; }
+
+/* Link-Buttons */
+.linkrow-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.linkbtn { display: flex; flex-direction: column; gap: 2px; text-decoration: none;
+  background: var(--field); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px;
+  transition: border-color .12s ease; }
+.linkbtn:hover { border-color: var(--accent); }
+.linkbtn-t { font-weight: 700; font-size: 14px; color: var(--text); }
+.linkbtn:hover .linkbtn-t { color: var(--accent); }
+.linkbtn-s { font-size: 12px; color: var(--muted); font-family: var(--mono); }
+
+.foot { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 0 2px; }
+.foot-txt { color: var(--muted); font-size: 12px; text-align: center; }
+.foot .ver { color: var(--muted); font-size: 12px; white-space: nowrap; }

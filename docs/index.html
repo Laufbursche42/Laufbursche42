@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' https://avatars.githubusercontent.com; connect-src 'self' https://api.github.com; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-t="pageTitle">Laufbursche42</title>
+<meta name="description" data-t-attr="content:metaDesc" content="Laufbursche42 - E-Scooter Tools und Projekte">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
+<link rel="stylesheet" href="styles.css?v=1">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Laufbursche<span>42</span></h1>
+    <div class="head-tools">
+      <button type="button" class="theme-btn" id="btn-theme" title="">&#9728;</button>
+      <div class="langs" id="langs" role="group">
+        <button type="button" data-lang="de" aria-pressed="true">DE</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="col col-repos">
+      <div class="card">
+        <div class="card-head">
+          <h2 data-t="reposTitle"></h2>
+          <span class="count" id="repo-count"></span>
+        </div>
+        <ul class="repo-list" id="repo-list" aria-live="polite">
+          <li class="repo-loading" data-t="reposLoading"></li>
+        </ul>
+        <p class="hint"><a id="all-repos" href="https://github.com/Laufbursche42?tab=repositories" target="_blank" rel="noopener" data-t="reposAll"></a></p>
+      </div>
+    </section>
+
+    <section class="col col-about">
+      <div class="card about">
+        <div class="about-head">
+          <img class="avatar" src="https://avatars.githubusercontent.com/Laufbursche42" alt="Laufbursche42" width="72" height="72" loading="lazy">
+          <div>
+            <h2 data-t="aboutTitle"></h2>
+            <p class="about-intro" data-t="aboutIntro"></p>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <h3 class="sub" data-t="doTitle"></h3>
+          <ul class="do-list">
+            <li><b data-t="do1t"></b> <span data-t="do1d"></span></li>
+            <li><b data-t="do2t"></b> <span data-t="do2d"></span></li>
+            <li><b data-t="do3t"></b> <span data-t="do3d"></span></li>
+            <li><b data-t="do4t"></b> <span data-t="do4d"></span></li>
+          </ul>
+        </div>
+
+        <div class="about-block">
+          <h3 class="sub" data-t="brandsTitle"></h3>
+          <div class="chips">
+            <span class="chip">SoFlow</span>
+            <span class="chip">Teverun</span>
+            <span class="chip">Viron</span>
+            <span class="chip">Trittbrett</span>
+            <span class="chip">Navee</span>
+            <span class="chip chip-more" data-t="brandsMore"></span>
+          </div>
+        </div>
+
+        <div class="callout">
+          <h3 class="callout-t" data-t="privacyTitle"></h3>
+          <p data-t="privacyText"></p>
+        </div>
+
+        <div class="about-block">
+          <h3 class="sub" data-t="contactTitle"></h3>
+          <p class="about-contact" data-t="contactText"></p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 data-t="linksTitle"></h2>
+        <div class="linkrow-grid">
+          <a class="linkbtn" href="https://github.com/Laufbursche42" target="_blank" rel="noopener">
+            <span class="linkbtn-t">GitHub</span>
+            <span class="linkbtn-s">@Laufbursche42</span>
+          </a>
+          <a class="linkbtn" href="https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/" target="_blank" rel="noopener">
+            <span class="linkbtn-t">escooter-stammtisch</span>
+            <span class="linkbtn-s">@laufbursche</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span class="foot-txt" data-t="footTxt"></span>
+    <span class="ver">&copy; <span id="year"></span> Laufbursche42</span>
+  </footer>
+</div>
+
+<script src="i18n.js?v=1"></script>
+<script src="app.js?v=1"></script>
+</body>
+</html>
