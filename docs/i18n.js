@@ -37,6 +37,16 @@ window.I18N = {
     contactText: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schreib mir einfach im escooter-stammtisch oder öffne ein GitHub-Issue im passenden Repository.",
     issueNew: "Fehler melden",
     issueNewTitle: "Fehler in diesem Repository melden (neues GitHub-Issue)",
+    pagesLink: "Website",
+    pagesTitle: "Projektseite öffnen",
+    dlApk: "APK",
+    dlApkTitle: "Neueste APK herunterladen",
+    dlWin: "Windows",
+    dlWinTitle: "Neueste Windows-Version herunterladen",
+    dlMac: "macOS",
+    dlMacTitle: "Neueste macOS-Version herunterladen",
+    dlLinux: "Linux",
+    dlLinuxTitle: "Neueste Linux-Version herunterladen",
 
     linksTitle: "Links",
 
@@ -77,6 +87,16 @@ window.I18N = {
     contactText: "Got an idea, a wish or ran into a bug? I am happy about every bit of feedback. Just message me on escooter-stammtisch or open a GitHub issue in the matching repository.",
     issueNew: "Bug Report",
     issueNewTitle: "Report a bug in this repository (new GitHub issue)",
+    pagesLink: "Website",
+    pagesTitle: "Open project website",
+    dlApk: "APK",
+    dlApkTitle: "Download latest APK",
+    dlWin: "Windows",
+    dlWinTitle: "Download latest Windows build",
+    dlMac: "macOS",
+    dlMacTitle: "Download latest macOS build",
+    dlLinux: "Linux",
+    dlLinuxTitle: "Download latest Linux build",
 
     linksTitle: "Links",
 

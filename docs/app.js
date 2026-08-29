@@ -3,26 +3,37 @@
 // Profilseite Laufbursche42. Theme- und Sprachlogik nach dem Muster aus sf-unlock.
 // Die Repo-Liste kommt live von der GitHub-API; schlägt das fehl, greift eine
 // eingebaute Fallback-Liste, damit die Seite nie leer bleibt.
+//
+// Pro Repo werden passende Aktionen gezeigt: Website (wenn GitHub Pages aktiv ist),
+// Downloads aus dem letzten Release (APK sowie Windows-, macOS- und Linux-Dateien,
+// erkannt am Dateinamen) und immer der Link zum Melden eines Fehlers.
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
+const LS_REL_PREFIX = 'lb_rel_';        // Cache je Repo für die Release-Downloads
+const REL_TTL = 30 * 60 * 1000;         // 30 Minuten, schont das API-Rate-Limit
 
 let lang = 'de';
 
 // Fallback, falls die API nicht erreichbar ist (Rate-Limit, offline). Wird nur
-// angezeigt, wenn der Live-Abruf scheitert. Stand: manuell gepflegt.
+// angezeigt, wenn der Live-Abruf scheitert. Stand: manuell gepflegt. hasPages und
+// downloads sind hier statisch hinterlegt, damit auch ohne Netz sinnvolle Buttons
+// erscheinen.
+const RELEASE_BASE = 'https://github.com/' + GH_USER + '/';
 const FALLBACK_REPOS = [
-  { name: 'leat', description: 'Telemetry Data Charts for tr-lb-edition route and ride recordings.', language: 'Go', stargazers_count: 0 },
-  { name: 'navee-unlock', description: 'Navee Tool', language: 'JavaScript', stargazers_count: 0 },
-  { name: 'sf-unlock', description: 'SoFlow Tool', language: 'JavaScript', stargazers_count: 0 },
-  { name: 'tb-unlock', description: 'Trittbrett Tool', language: 'JavaScript', stargazers_count: 0 },
-  { name: 'tr-fw', description: 'Laufbursche Edition Firmware Patcher for Teverun Fighter Mini (eKFV)', language: 'JavaScript', stargazers_count: 2 },
-  { name: 'tr-lb-edition', description: 'Alternative Android APP for Teverun E-Scooters', language: 'Java', stargazers_count: 4 },
-  { name: 'trbm-unlock', description: 'Trittbrett Mini Tool', language: 'JavaScript', stargazers_count: 0 },
-  { name: 'trfm-unlock', description: 'Laufbursche Edition Teverun Fighter Mini (eKFV) unlock', language: 'JavaScript', stargazers_count: 2 },
-  { name: 'vr-unlock', description: 'Viron Tool', language: 'JavaScript', stargazers_count: 0 }
+  { name: 'leat', description: 'Telemetry Data Charts for tr-lb-edition route and ride recordings.', language: 'Go', stargazers_count: 0, hasPages: false,
+    downloads: { win: RELEASE_BASE + 'leat/releases/latest', mac: RELEASE_BASE + 'leat/releases/latest', linux: RELEASE_BASE + 'leat/releases/latest' } },
+  { name: 'navee-unlock', description: 'Navee Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
+  { name: 'sf-unlock', description: 'SoFlow Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
+  { name: 'tb-unlock', description: 'Trittbrett Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
+  { name: 'tr-fw', description: 'Laufbursche Edition Firmware Patcher for Teverun Fighter Mini (eKFV)', language: 'JavaScript', stargazers_count: 2, hasPages: true },
+  { name: 'tr-lb-edition', description: 'Alternative Android APP for Teverun E-Scooters', language: 'Java', stargazers_count: 4, hasPages: false,
+    downloads: { apk: RELEASE_BASE + 'tr-lb-edition/releases/latest' } },
+  { name: 'trbm-unlock', description: 'Trittbrett Mini Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
+  { name: 'trfm-unlock', description: 'Laufbursche Edition Teverun Fighter Mini (eKFV) unlock', language: 'JavaScript', stargazers_count: 2, hasPages: true },
+  { name: 'vr-unlock', description: 'Viron Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true }
 ];
 
 // Farbtupfer je Sprache. Bewusst schlicht, nur ein paar gängige Sprachen.
@@ -59,7 +70,7 @@ function applyLang() {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
 
-  renderRepos(); // Ladehinweis/Fehlertext in neuer Sprache nachziehen
+  renderRepos(); // Ladehinweis/Fehlertext sowie Button-Beschriftungen neu ziehen
 }
 
 function setLang(next) {
@@ -78,16 +89,52 @@ function applyTheme(dark) {
   try { localStorage.setItem(LS_THEME, dark ? 'dark' : 'light'); } catch (e) {}
 }
 
+// Website-Adresse eines Repos: eigene homepage wenn gesetzt, sonst die übliche
+// github.io-Adresse falls Pages aktiv ist, sonst keine.
+function computePageUrl(r) {
+  if (r.homepage && /^https?:\/\//i.test(r.homepage)) return r.homepage;
+  if (r.hasPages) return 'https://' + GH_USER.toLowerCase() + '.github.io/' + r.name + '/';
+  return null;
+}
+
+// Ordnet Release-Dateien anhand ihres Namens einer Plattform zu. Erste passende
+// Datei je Plattform gewinnt.
+function classifyAssets(assets) {
+  const out = {};
+  (assets || []).forEach((a) => {
+    const n = (a.name || '').toLowerCase();
+    const url = a.browser_download_url;
+    if (!url) return;
+    if (!out.apk && n.endsWith('.apk')) out.apk = url;
+    else if (!out.win && (n.endsWith('.exe') || n.endsWith('.msi') || /(^|[-_.])win(dows|64|32)?([-_.]|$)/.test(n))) out.win = url;
+    else if (!out.mac && (n.endsWith('.dmg') || n.endsWith('.pkg') || /(^|[-_.])(mac(os)?|osx|darwin)([-_.]|$)/.test(n))) out.mac = url;
+    else if (!out.linux && (n.endsWith('.appimage') || n.endsWith('.deb') || n.endsWith('.rpm') || /(^|[-_.])linux([-_.]|$)/.test(n))) out.linux = url;
+  });
+  return out;
+}
+
 // Zustand der Repo-Daten, damit ein Sprachwechsel neu rendern kann.
 let repoState = { status: 'loading', repos: [] };
+
+// Kleiner Pill-Link für die Aktionsleiste einer Karte.
+function actPill(label, title, href, cls) {
+  const a = document.createElement('a');
+  a.className = 'repo-act ' + cls;
+  a.href = href;
+  a.target = '_blank';
+  a.rel = 'noopener';
+  a.textContent = label;
+  if (title) a.title = title;
+  return a;
+}
 
 function repoCard(r) {
   const repoUrl = 'https://github.com/' + GH_USER + '/' + r.name;
 
-  // Container ist ein div, nicht ein <a>, damit der Issue-Link darin ein eigener
-  // Link sein kann (verschachtelte <a> sind ungültig). Der Name trägt einen
-  // Overlay-Link (::after in CSS), sodass ein Klick auf die ganze Karte das Repo
-  // öffnet; der Issue-Link liegt per z-index darüber.
+  // Container ist ein div, nicht ein <a>, damit die Aktions-Links darin eigene
+  // Links sein können (verschachtelte <a> sind ungültig). Der Name trägt einen
+  // Overlay-Link (::after in CSS), sodass ein Klick auf die freie Kartenfläche
+  // das Repo öffnet; die Pills liegen per z-index darüber.
   const card = document.createElement('div');
   card.className = 'repo';
 
@@ -115,10 +162,9 @@ function repoCard(r) {
     card.appendChild(d);
   }
 
-  // Fußzeile: links Sprache (falls vorhanden), rechts der Neues-Issue-Link.
-  const meta = document.createElement('div');
-  meta.className = 'repo-meta';
   if (r.language) {
+    const meta = document.createElement('div');
+    meta.className = 'repo-meta';
     const dot = document.createElement('span');
     dot.className = 'dot';
     dot.style.background = LANG_COLORS[r.language] || 'var(--gps)';
@@ -127,16 +173,23 @@ function repoCard(r) {
     lg.textContent = r.language;
     meta.appendChild(dot);
     meta.appendChild(lg);
+    card.appendChild(meta);
   }
-  const issue = document.createElement('a');
-  issue.className = 'repo-issue';
-  issue.href = repoUrl + '/issues/new';
-  issue.target = '_blank';
-  issue.rel = 'noopener';
-  issue.textContent = t('issueNew');
-  issue.title = t('issueNewTitle');
-  meta.appendChild(issue);
-  card.appendChild(meta);
+
+  // Aktionsleiste: Website, Downloads je Plattform sowie ganz rechts Fehler melden.
+  const actions = document.createElement('div');
+  actions.className = 'repo-actions';
+  const pageUrl = r.pageUrl || computePageUrl(r);
+  if (pageUrl) actions.appendChild(actPill(t('pagesLink'), t('pagesTitle'), pageUrl, 'is-page'));
+
+  const dl = r.downloads || {};
+  if (dl.apk) actions.appendChild(actPill(t('dlApk'), t('dlApkTitle'), dl.apk, 'is-dl'));
+  if (dl.win) actions.appendChild(actPill(t('dlWin'), t('dlWinTitle'), dl.win, 'is-dl'));
+  if (dl.mac) actions.appendChild(actPill(t('dlMac'), t('dlMacTitle'), dl.mac, 'is-dl'));
+  if (dl.linux) actions.appendChild(actPill(t('dlLinux'), t('dlLinuxTitle'), dl.linux, 'is-dl'));
+
+  actions.appendChild(actPill(t('issueNew'), t('issueNewTitle'), repoUrl + '/issues/new', 'is-issue'));
+  card.appendChild(actions);
 
   return card;
 }
@@ -171,6 +224,48 @@ function renderRepos() {
   if (count) count.textContent = repoState.repos.length ? String(repoState.repos.length) : '';
 }
 
+// Holt die Downloads des letzten Releases eines Repos, mit localStorage-Cache.
+// Leere Ergebnisse (kein Release, 404) werden mitgecacht, damit Repos ohne Release
+// nicht bei jedem Besuch erneut abgefragt werden. Bei Rate-Limit (403) oder
+// Netzfehler wird nicht gecacht.
+async function fetchDownloads(name) {
+  try {
+    const raw = localStorage.getItem(LS_REL_PREFIX + name);
+    if (raw) {
+      const c = JSON.parse(raw);
+      if (c && typeof c.t === 'number' && (Date.now() - c.t) < REL_TTL) return c.d || {};
+    }
+  } catch (e) {}
+
+  try {
+    const res = await fetch(
+      'https://api.github.com/repos/' + GH_USER + '/' + name + '/releases/latest',
+      { headers: { Accept: 'application/vnd.github+json' } }
+    );
+    if (res.ok) {
+      const rel = await res.json();
+      const d = classifyAssets(rel.assets);
+      try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d })); } catch (e) {}
+      return d;
+    }
+    if (res.status === 404) {
+      try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d: {} })); } catch (e) {}
+      return {};
+    }
+  } catch (e) {}
+  return {};
+}
+
+// Lädt die Downloads aller angezeigten Repos parallel und rendert danach neu.
+async function loadReleases() {
+  if (repoState.status !== 'ok') return;
+  const repos = repoState.repos;
+  await Promise.all(repos.map(async (r) => {
+    r.downloads = await fetchDownloads(r.name);
+  }));
+  renderRepos();
+}
+
 async function loadRepos() {
   try {
     const res = await fetch(
@@ -181,12 +276,28 @@ async function loadRepos() {
     const data = await res.json();
     const repos = data
       .filter((r) => !r.fork && !r.archived && r.name.toLowerCase() !== GH_USER.toLowerCase())
-      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
+      .map((r) => ({
+        name: r.name,
+        description: r.description,
+        language: r.language,
+        stargazers_count: r.stargazers_count,
+        hasPages: !!r.has_pages,
+        homepage: r.homepage || '',
+        pageUrl: null,
+        downloads: null
+      }));
+    repos.forEach((r) => { r.pageUrl = computePageUrl(r); });
     repoState = { status: 'ok', repos };
+    renderRepos();
+    loadReleases(); // Downloads nachladen und danach erneut rendern
+    return;
   } catch (e) {
-    repoState = { status: 'error', repos: FALLBACK_REPOS };
+    const repos = FALLBACK_REPOS.map((r) => Object.assign({}, r));
+    repos.forEach((r) => { r.pageUrl = computePageUrl(r); });
+    repoState = { status: 'error', repos };
+    renderRepos();
   }
-  renderRepos();
 }
 
 function init() {
