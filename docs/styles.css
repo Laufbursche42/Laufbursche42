@@ -57,15 +57,18 @@ h1 span { color: var(--accent); }
    zuerst über mich, dann Repos, dann Links. */
 .layout { display: grid; gap: 16px; align-items: start;
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+  grid-template-rows: auto auto 1fr;
   grid-template-areas:
     "repos about"
-    "repos links"; }
+    "repos links"
+    "repos ."; }
 .area-repos { grid-area: repos; }
 .area-about { grid-area: about; }
 .area-links { grid-area: links; }
 @media (max-width: 760px) {
   .layout {
     grid-template-columns: 1fr;
+    grid-template-rows: none;
     grid-template-areas:
       "about"
       "repos"
