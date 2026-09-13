@@ -31,7 +31,7 @@ window.I18N = {
     brandsMore: "und mehr",
 
     privacyTitle: "Datensparsamkeit",
-    privacyText: "Mein Anspruch ist es, Apps und Web-Apps zu bauen, die so wenig Daten wie irgend möglich nach auÄŸen senden. Datensparsamkeit steht bei jedem Projekt an erster Stelle: kein Konto, keine Analyse, keine Telemetrie, kein Tracking. Wo eine Verbindung nötig ist, etwa für öffentliche Karten- oder Routing-Daten, geschieht das nur auf deine ausdrückliche Aktion. Fahrzeug- oder persönliche Daten werden dabei nie übertragen.",
+    privacyText: "Mein Anspruch ist es, Apps und Web-Apps zu bauen, die so wenig Daten wie irgend möglich nach außen senden. Datensparsamkeit steht bei jedem Projekt an erster Stelle: kein Konto, keine Analyse, keine Telemetrie, kein Tracking. Wo eine Verbindung nötig ist, etwa für öffentliche Karten- oder Routing-Daten, geschieht das nur auf deine ausdrückliche Aktion. Fahrzeug- oder persönliche Daten werden dabei nie übertragen.",
 
     contactTitle: "Bugs / Fragen",
     contactText: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schreib mir einfach im escooter-stammtisch oder öffne ein GitHub-Issue im passenden Repository.",
