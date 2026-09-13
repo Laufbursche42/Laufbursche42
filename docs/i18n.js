@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-// Alle sichtbaren Texte der Seite in beiden Sprachen. Die SchlÃ¼ssel passen zu den
+// Alle sichtbaren Texte der Seite in beiden Sprachen. Die Schlüssel passen zu den
 // data-t-Attributen in index.html. Deutsch ist Voreinstellung; der Umschalter sitzt im Kopf.
 window.I18N = {
   de: {
@@ -9,36 +9,36 @@ window.I18N = {
     themeToLight: "Auf helle Darstellung umschalten",
     themeToDark: "Auf dunkle Darstellung umschalten",
 
-    reposTitle: "Ã–ffentliche Repositories",
+    reposTitle: "Öffentliche Repositories",
     reposLoading: "Repositories werden geladen ...",
     reposError: "Die Liste konnte nicht von GitHub geladen werden. Direkt auf GitHub ansehen.",
     reposAll: "Alle Repositories auf GitHub ansehen",
 
-    aboutTitle: "Ãœber mich",
+    aboutTitle: "Über mich",
     aboutIntro: "Hi, ich bin Laufbursche42. Ich schraube an E-Scootern und baue Werkzeuge, mit denen sich Fahrzeuge verschiedener Hersteller auslesen, konfigurieren und entsperren lassen.",
 
-    doTitle: "Womit ich mich beschÃ¤ftige",
+    doTitle: "Womit ich mich beschäftige",
     do1t: "Web-Apps",
-    do1d: "direkt im Browser Ã¼ber Web Bluetooth.",
+    do1d: "direkt im Browser über Web Bluetooth.",
     do2t: "Firmware-Patches",
-    do2d: "angepasste Firmware fÃ¼r einzelne Modelle.",
+    do2d: "angepasste Firmware für einzelne Modelle.",
     do3t: "Android-App",
     do3d: "eine eigene Alternative zur Hersteller-Software.",
     do4t: "App-Analyse",
-    do4d: "Hersteller-Apps auf Datensammlung, Tracker und Datenschutz prÃ¼fen.",
+    do4d: "Hersteller-Apps auf Datensammlung, Tracker und Datenschutz prüfen.",
 
     brandsTitle: "Marken, mit denen ich mich befasse",
     brandsMore: "und mehr",
 
     privacyTitle: "Datensparsamkeit",
-    privacyText: "Mein Anspruch ist es, Apps und Web-Apps zu bauen, die so wenig Daten wie irgend mÃ¶glich nach auÃŸen senden. Datensparsamkeit steht bei jedem Projekt an erster Stelle: kein Konto, keine Analyse, keine Telemetrie, kein Tracking. Wo eine Verbindung nÃ¶tig ist, etwa fÃ¼r Ã¶ffentliche Karten- oder Routing-Daten, geschieht das nur auf deine ausdrÃ¼ckliche Aktion. Fahrzeug- oder persÃ¶nliche Daten werden dabei nie Ã¼bertragen.",
+    privacyText: "Mein Anspruch ist es, Apps und Web-Apps zu bauen, die so wenig Daten wie irgend möglich nach auÄŸen senden. Datensparsamkeit steht bei jedem Projekt an erster Stelle: kein Konto, keine Analyse, keine Telemetrie, kein Tracking. Wo eine Verbindung nötig ist, etwa für öffentliche Karten- oder Routing-Daten, geschieht das nur auf deine ausdrückliche Aktion. Fahrzeug- oder persönliche Daten werden dabei nie übertragen.",
 
     contactTitle: "Bugs / Fragen",
-    contactText: "Du hast eine Idee, einen Wunsch oder bist Ã¼ber einen Fehler gestolpert? Ich freue mich Ã¼ber jede RÃ¼ckmeldung. Schreib mir einfach im escooter-stammtisch oder Ã¶ffne ein GitHub-Issue im passenden Repository.",
+    contactText: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schreib mir einfach im escooter-stammtisch oder öffne ein GitHub-Issue im passenden Repository.",
     issueNew: "Fehler melden",
     issueNewTitle: "Fehler in diesem Repository melden (neues GitHub-Issue)",
     pagesLink: "Website",
-    pagesTitle: "Projektseite Ã¶ffnen",
+    pagesTitle: "Projektseite öffnen",
     dlApk: "APK",
     dlApkTitle: "Neueste APK herunterladen",
     dlWin: "Windows",
@@ -99,3 +99,4 @@ window.I18N = {
     linksTitle: "Links"
   }
 };
+
