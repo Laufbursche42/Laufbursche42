@@ -33,6 +33,11 @@ window.I18N = {
     privacyTitle: "Datensparsamkeit",
     privacyText: "Mein Anspruch ist es, Apps und Web-Apps zu bauen, die so wenig Daten wie irgend möglich nach außen senden. Datensparsamkeit steht bei jedem Projekt an erster Stelle: kein Konto, keine Analyse, keine Telemetrie, kein Tracking. Wo eine Verbindung nötig ist, etwa für öffentliche Karten- oder Routing-Daten, geschieht das nur auf deine ausdrückliche Aktion. Fahrzeug- oder persönliche Daten werden dabei nie übertragen.",
 
+    aiTitle: "Einsatz von LLMs",
+    aiP1: "In diesen Projekten werden LLMs (Sprachmodelle) eingesetzt. Das legen wir hier offen. Sie helfen beim Erarbeiten von Inhalten, beim Erstellen von Programmcode und beim Prüfen der Ergebnisse. Wichtige Ergebnisse werden dabei von mehreren Modellen gegengeprüft. Alles, was hier veröffentlicht wird, kann daher zumindest teilweise mit ihrer Unterstützung entstanden sein.",
+    aiP2: "Ganz genau zu benennen, an welcher Stelle ein Modell mitgewirkt hat und wo nicht, ist in der Praxis nicht immer möglich. Modell und menschliche Arbeit greifen eng ineinander - Ideen, Formulierungen, Codeteile und Bewertungen entstehen oft im Wechselspiel.",
+    aiP3: "Die Verantwortung bleibt beim Menschen. Fragestellung, Richtung, fachliche Einordnung und die abschließende Entscheidung liegen bei uns. LLMs sind ein Werkzeug, das die Arbeit beschleunigt, sie aber nicht ersetzt.",
+
     contactTitle: "Bugs / Fragen",
     contactText: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schreib mir einfach im escooter-stammtisch oder öffne ein GitHub-Issue im passenden Repository.",
     issueNew: "Fehler melden",
@@ -80,6 +85,11 @@ window.I18N = {
 
     privacyTitle: "Data minimalism",
     privacyText: "My aim is to build apps and web apps that send as little data as possible anywhere. Data minimalism comes first in every project: no account, no analytics, no telemetry, no tracking. Where a connection is needed, for example for public map or routing data, it happens only on your explicit action. No vehicle or personal data is ever transmitted.",
+
+    aiTitle: "Use of LLMs",
+    aiP1: "These projects make use of LLMs (language models). We disclose that openly here. They help with drafting content, writing program code and checking the results. Important results are cross-checked by several models. Anything published here may therefore have been created at least in part with their help.",
+    aiP2: "Pinpointing exactly where a model contributed and where it did not is not always possible in practice. Model and human work are closely intertwined - ideas, wording, pieces of code and assessments often emerge in the interplay.",
+    aiP3: "Responsibility stays with the human. The questions asked, the direction, the technical judgement and the final decision rest with us. LLMs are a tool that speeds the work up but does not replace it.",
 
     contactTitle: "Bugs / Questions",
     contactText: "Got an idea, a wish or ran into a bug? I am happy about every bit of feedback. Just message me on escooter-stammtisch or open a GitHub issue in the matching repository.",
