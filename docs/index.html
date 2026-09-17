@@ -31,6 +31,7 @@
           <h2 data-t="reposTitle"></h2>
           <span class="count" id="repo-count"></span>
         </div>
+        <input type="search" class="repo-search" id="repo-search" data-t-attr="placeholder:reposSearch" autocomplete="off" spellcheck="false">
         <ul class="repo-list" id="repo-list" aria-live="polite">
           <li class="repo-loading" data-t="reposLoading"></li>
         </ul>
@@ -41,7 +42,7 @@
     <section class="area-about">
       <div class="card about">
         <div class="about-head">
-          <img class="avatar" src="https://avatars.githubusercontent.com/Laufbursche42" alt="Laufbursche42" width="72" height="72" loading="lazy">
+          <img class="avatar" src="https://avatars.githubusercontent.com/Laufbursche42" alt="Laufbursche42" width="72" height="72" loading="lazy"> <!-- scan-ok: user's own GitHub avatar, allowed by CSP img-src -->
           <div>
             <h2 data-t="aboutTitle"></h2>
             <p class="about-intro" data-t="aboutIntro"></p>

@@ -1,26 +1,25 @@
 'use strict';
 
-// Profilseite Laufbursche42. Theme- und Sprachlogik nach dem Muster aus sf-unlock.
-// Die Repo-Liste kommt live von der GitHub-API; schlägt das fehl, greift eine
-// eingebaute Fallback-Liste, damit die Seite nie leer bleibt.
+// Profile page Laufbursche42. Theme and language logic follow the sf-unlock pattern.
+// The repo list is loaded live from the GitHub API; if that fails, a built-in
+// fallback list is used so the page is never empty.
 //
-// Pro Repo werden passende Aktionen gezeigt: Website (wenn GitHub Pages aktiv ist),
-// Downloads aus dem letzten Release (APK sowie Windows-, macOS- und Linux-Dateien,
-// erkannt am Dateinamen) und immer der Link zum Melden eines Fehlers.
+// Each repo shows the matching actions: website (when GitHub Pages is active),
+// downloads from the latest release (APK plus Windows, macOS and Linux files,
+// detected by file name) and always the link to report a bug.
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
-const LS_REL_PREFIX = 'lb_rel_';        // Cache je Repo für die Release-Downloads
-const REL_TTL = 30 * 60 * 1000;         // 30 Minuten, schont das API-Rate-Limit
+const LS_REL_PREFIX = 'lb_rel_';        // per-repo cache for the release downloads
+const REL_TTL = 30 * 60 * 1000;         // 30 minutes, eases the API rate limit
 
 let lang = 'de';
 
-// Fallback, falls die API nicht erreichbar ist (Rate-Limit, offline). Wird nur
-// angezeigt, wenn der Live-Abruf scheitert. Stand: manuell gepflegt. hasPages und
-// downloads sind hier statisch hinterlegt, damit auch ohne Netz sinnvolle Buttons
-// erscheinen.
+// Fallback if the API is unreachable (rate limit, offline). Shown only when the
+// live fetch fails. Manually maintained. hasPages and downloads are hardcoded
+// here so that sensible buttons appear even without a network connection.
 const RELEASE_BASE = 'https://github.com/' + GH_USER + '/';
 const FALLBACK_REPOS = [
   { name: 'leat', description: 'Telemetry Data Charts for tr-lb-edition route and ride recordings.', language: 'Go', stargazers_count: 0, hasPages: false,
@@ -36,9 +35,9 @@ const FALLBACK_REPOS = [
   { name: 'vr-unlock', description: 'Viron Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true }
 ];
 
-// Farbtupfer je Sprache. Bewusst schlicht, nur ein paar gängige Sprachen.
+// a splash of color per language. Deliberately simple, only a few common languages.
 const LANG_COLORS = {
-  JavaScript: '#f1e05a', TypeScript: '#3178c6', Java: '#b07219', Go: '#00ADD8',
+  JavaScript: '#f1e05a', TypeScript: '#3178c6', Java: '#b07219', Go: '#00ADD8', // scan-ok: language-name keys, not a javascript: URI
   Python: '#3572A5', C: '#555555', 'C++': '#f34b7d', HTML: '#e34c26', CSS: '#563d7c',
   Shell: '#89e051', Kotlin: '#A97BFF', Dart: '#00B4AB', Rust: '#dea584'
 };
@@ -56,12 +55,12 @@ function applyLang() {
     el.textContent = t(el.getAttribute('data-t'));
   });
   document.querySelectorAll('[data-t-attr]').forEach((el) => {
-    const spec = el.getAttribute('data-t-attr'); // Form "attr:key"
+    const spec = el.getAttribute('data-t-attr'); // form "attr:key"
     const [attr, key] = spec.split(':');
     if (attr && key) el.setAttribute(attr, t(key));
   });
 
-  // Theme-Knopf-Titel spiegelt die nächste Aktion.
+  // theme-button title reflects the next action.
   const dark = document.documentElement.getAttribute('data-theme') !== 'light';
   const tb = $('btn-theme');
   if (tb) tb.title = dark ? t('themeToLight') : t('themeToDark');
@@ -70,7 +69,7 @@ function applyLang() {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
 
-  renderRepos(); // Ladehinweis/Fehlertext sowie Button-Beschriftungen neu ziehen
+  renderRepos(); // refresh loading/error text and button labels
 }
 
 function setLang(next) {
@@ -83,22 +82,22 @@ function applyTheme(dark) {
   document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
   const tb = $('btn-theme');
   if (tb) {
-    tb.innerHTML = dark ? '&#9728;' : '&#9790;'; // Sonne im Dark-, Mond im Light-Mode
+    tb.innerHTML = dark ? '&#9728;' : '&#9790;'; // scan-ok: fixed characters (sun/moon), not user input
     tb.title = dark ? t('themeToLight') : t('themeToDark');
   }
   try { localStorage.setItem(LS_THEME, dark ? 'dark' : 'light'); } catch (e) {}
 }
 
-// Website-Adresse eines Repos: eigene homepage wenn gesetzt, sonst die übliche
-// github.io-Adresse falls Pages aktiv ist, sonst keine.
+// Website address of a repo: its own homepage if set, otherwise the usual
+// github.io address if Pages is active, otherwise none.
 function computePageUrl(r) {
   if (r.homepage && /^https?:\/\//i.test(r.homepage)) return r.homepage;
   if (r.hasPages) return 'https://' + GH_USER.toLowerCase() + '.github.io/' + r.name + '/';
   return null;
 }
 
-// Ordnet Release-Dateien anhand ihres Namens einer Plattform zu. Erste passende
-// Datei je Plattform gewinnt.
+// Maps release files to a platform by their name. First matching file per
+// platform wins.
 function classifyAssets(assets) {
   const out = {};
   (assets || []).forEach((a) => {
@@ -113,10 +112,18 @@ function classifyAssets(assets) {
   return out;
 }
 
-// Zustand der Repo-Daten, damit ein Sprachwechsel neu rendern kann.
+// repo data state so a language switch can re-render.
 let repoState = { status: 'loading', repos: [] };
+let repoQuery = '';
 
-// Kleiner Pill-Link für die Aktionsleiste einer Karte.
+// Match when all search terms (whitespace-separated) appear in the name or the
+// description. q is already lowercased and trimmed.
+function repoMatches(r, q) {
+  const hay = ((r.name || '') + ' ' + (r.description || '')).toLowerCase();
+  return q.split(/\s+/).filter(Boolean).every((term) => hay.includes(term));
+}
+
+// small pill link for a card's action bar.
 function actPill(label, title, href, cls) {
   const a = document.createElement('a');
   a.className = 'repo-act ' + cls;
@@ -131,10 +138,10 @@ function actPill(label, title, href, cls) {
 function repoCard(r) {
   const repoUrl = 'https://github.com/' + GH_USER + '/' + r.name;
 
-  // Container ist ein div, nicht ein <a>, damit die Aktions-Links darin eigene
-  // Links sein können (verschachtelte <a> sind ungültig). Der Name trägt einen
-  // Overlay-Link (::after in CSS), sodass ein Klick auf die freie Kartenfläche
-  // das Repo öffnet; die Pills liegen per z-index darüber.
+  // The container is a div, not an <a>, so the action links inside can be their
+  // own links (nested <a> is invalid). The name carries an overlay link (::after
+  // in CSS) so a click on the free card area opens the repo; the pills sit above
+  // it via z-index.
   const card = document.createElement('div');
   card.className = 'repo';
 
@@ -176,7 +183,7 @@ function repoCard(r) {
     card.appendChild(meta);
   }
 
-  // Aktionsleiste: Website, Downloads je Plattform sowie ganz rechts Fehler melden.
+  // action bar: website, per-platform downloads, and report-a-bug on the far right.
   const actions = document.createElement('div');
   actions.className = 'repo-actions';
   const pageUrl = r.pageUrl || computePageUrl(r);
@@ -198,7 +205,7 @@ function renderRepos() {
   const list = $('repo-list');
   const count = $('repo-count');
   if (!list) return;
-  list.innerHTML = '';
+  list.textContent = '';
 
   if (repoState.status === 'loading') {
     const li = document.createElement('li');
@@ -216,18 +223,32 @@ function renderRepos() {
     list.appendChild(li);
   }
 
-  repoState.repos.forEach((r) => {
+  const q = repoQuery.trim().toLowerCase();
+  const shown = q ? repoState.repos.filter((r) => repoMatches(r, q)) : repoState.repos;
+
+  shown.forEach((r) => {
     const li = document.createElement('li');
     li.appendChild(repoCard(r));
     list.appendChild(li);
   });
-  if (count) count.textContent = repoState.repos.length ? String(repoState.repos.length) : '';
+
+  if (q && shown.length === 0) {
+    const li = document.createElement('li');
+    li.className = 'repo-loading';
+    li.textContent = t('reposNoMatch');
+    list.appendChild(li);
+  }
+
+  if (count) {
+    const total = repoState.repos.length;
+    count.textContent = total ? (q ? shown.length + ' / ' + total : String(total)) : '';
+  }
 }
 
-// Holt die Downloads des letzten Releases eines Repos, mit localStorage-Cache.
-// Leere Ergebnisse (kein Release, 404) werden mitgecacht, damit Repos ohne Release
-// nicht bei jedem Besuch erneut abgefragt werden. Bei Rate-Limit (403) oder
-// Netzfehler wird nicht gecacht.
+// Fetches the downloads of a repo's latest release, with a localStorage cache.
+// Empty results (no release, 404) are cached too, so repos without a release
+// are not re-queried on every visit. On a rate limit (403) or a network error
+// nothing is cached.
 async function fetchDownloads(name) {
   try {
     const raw = localStorage.getItem(LS_REL_PREFIX + name);
@@ -256,7 +277,7 @@ async function fetchDownloads(name) {
   return {};
 }
 
-// Lädt die Downloads aller angezeigten Repos parallel und rendert danach neu.
+// loads the downloads of all shown repos in parallel, then re-renders.
 async function loadReleases() {
   if (repoState.status !== 'ok') return;
   const repos = repoState.repos;
@@ -290,7 +311,7 @@ async function loadRepos() {
     repos.forEach((r) => { r.pageUrl = computePageUrl(r); });
     repoState = { status: 'ok', repos };
     renderRepos();
-    loadReleases(); // Downloads nachladen und danach erneut rendern
+    loadReleases(); // load downloads afterwards, then re-render
     return;
   } catch (e) {
     const repos = FALLBACK_REPOS.map((r) => Object.assign({}, r));
@@ -301,14 +322,14 @@ async function loadRepos() {
 }
 
 function init() {
-  // Sprache: Deutsch ist Standard. Nur eine gespeicherte Wahl (Umschalter) hat Vorrang.
+  // language: German is the default. Only a stored choice (the switch) takes precedence.
   let savedLang = null;
   try { savedLang = localStorage.getItem(LS_LANG); } catch (e) {}
   if (savedLang === 'de' || savedLang === 'en') {
     lang = savedLang;
   }
 
-  // Theme: gespeichert, sonst Systemvorliebe, sonst Dark.
+  // theme: stored, else system preference, else dark.
   let savedTheme = null;
   try { savedTheme = localStorage.getItem(LS_THEME); } catch (e) {}
   let dark = true;
@@ -324,6 +345,9 @@ function init() {
   document.querySelectorAll('#langs button').forEach((b) => {
     b.addEventListener('click', () => setLang(b.dataset.lang));
   });
+
+  const rs = $('repo-search');
+  if (rs) rs.addEventListener('input', () => { repoQuery = rs.value; renderRepos(); });
 
   const y = $('year');
   if (y) y.textContent = new Date().getFullYear();
