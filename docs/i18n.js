@@ -27,7 +27,7 @@ window.I18N = {
     toolOpenTitle: "Laufbursche Tool (Web) öffnen",
 
     aboutTitle: "Über mich",
-    aboutIntro: "Hi, ich bin Laufbursche42. Ich schraube an E-Scootern und baue Werkzeuge, mit denen sich Fahrzeuge verschiedener Hersteller auslesen, konfigurieren und entsperren lassen.",
+    aboutIntro: "Hi, ich bin Laufbursche42. Ich schraube an E-Scootern und baue Werkzeuge, mit denen sich Fahrzeuge verschiedener Hersteller auslesen, konfigurieren und tunen lassen.",
 
     doTitle: "Womit ich mich beschäftige",
     do1t: "Web-Apps",
@@ -92,7 +92,7 @@ window.I18N = {
     toolOpenTitle: "Open the Laufbursche Tool (Web)",
 
     aboutTitle: "About me",
-    aboutIntro: "Hi, I am Laufbursche42. I tinker with e-scooters and build tools that read out, configure and unlock vehicles from various manufacturers.",
+    aboutIntro: "Hi, I am Laufbursche42. I tinker with e-scooters and build tools that read out, configure and tune vehicles from various manufacturers.",
 
     doTitle: "What I work on",
     do1t: "Web apps",
