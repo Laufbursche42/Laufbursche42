@@ -51,7 +51,7 @@ window.I18N = {
     aiP3: "Die Verantwortung bleibt beim Menschen. Fragestellung, Richtung, fachliche Einordnung und die abschließende Entscheidung liegen bei mir. LLMs sind ein Werkzeug, das die Arbeit beschleunigt, sie aber nicht ersetzt.",
 
     contactTitle: "Bugs / Fragen",
-    contactText: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schreib mir einfach im escooter-stammtisch oder öffne ein GitHub-Issue im passenden Repository.",
+    contactTextHtml: "Du hast eine Idee, einen Wunsch oder bist über einen Fehler gestolpert? Ich freue mich über jede Rückmeldung. Schick mir eine <a href=\"https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/\" target=\"_blank\" rel=\"noopener\">PN im escooter-stammtisch</a> oder öffne ein <a href=\"https://github.com/Laufbursche42/Laufbursche42/issues/new\" target=\"_blank\" rel=\"noopener\">GitHub-Issue</a>.",
     issueNew: "Fehler melden",
     issueNewTitle: "Fehler in diesem Repository melden (neues GitHub-Issue)",
     pagesLink: "Website",
@@ -116,7 +116,7 @@ window.I18N = {
     aiP3: "Responsibility stays with the human. The questions asked, the direction, the technical judgement and the final decision rest with me. LLMs are a tool that speeds the work up but does not replace it.",
 
     contactTitle: "Bugs / Questions",
-    contactText: "Got an idea, a wish or ran into a bug? I am happy about every bit of feedback. Just message me on escooter-stammtisch or open a GitHub issue in the matching repository.",
+    contactTextHtml: "Got an idea, a wish or ran into a bug? I am happy about every bit of feedback. Send me a <a href=\"https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/\" target=\"_blank\" rel=\"noopener\">PM on the escooter-stammtisch forum</a> or open a <a href=\"https://github.com/Laufbursche42/Laufbursche42/issues/new\" target=\"_blank\" rel=\"noopener\">GitHub issue</a>.",
     issueNew: "Bug Report",
     issueNewTitle: "Report a bug in this repository (new GitHub issue)",
     pagesLink: "Website",

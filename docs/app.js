@@ -65,7 +65,9 @@ function applyLang() {
   document.title = t('pageTitle');
 
   document.querySelectorAll('[data-t]').forEach((el) => {
-    el.textContent = t(el.getAttribute('data-t'));
+    const key = el.getAttribute('data-t');
+    const val = t(key);
+    if (/Html$/.test(key)) el.innerHTML = val; else el.textContent = val;   // scan-ok: our own i18n table
   });
   document.querySelectorAll('[data-t-attr]').forEach((el) => {
     const spec = el.getAttribute('data-t-attr'); // form "attr:key"
