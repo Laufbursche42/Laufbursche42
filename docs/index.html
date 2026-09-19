@@ -9,7 +9,7 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
-<link rel="stylesheet" href="styles.css?v=1">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body>
 <div class="wrap">
@@ -28,15 +28,35 @@
     <section class="area-repos">
       <div class="card">
         <div class="card-head">
-          <h2 data-t="reposTitle"></h2>
-          <span class="count" id="repo-count"></span>
+          <h2 data-t="searchTitle"></h2>
         </div>
         <input type="search" class="repo-search" id="repo-search" data-t-attr="placeholder:reposSearch" autocomplete="off" spellcheck="false">
-        <ul class="repo-list" id="repo-list" aria-live="polite">
-          <li class="repo-loading" data-t="reposLoading"></li>
-        </ul>
-        <p class="hint"><a id="all-repos" href="https://github.com/Laufbursche42?tab=repositories" target="_blank" rel="noopener" data-t="reposAll"></a></p>
       </div>
+
+      <div class="card feature" id="tool-card">
+        <div class="card-head">
+          <h2>Laufbursche Tool (Web)</h2>
+        </div>
+        <p class="hint" data-t="toolDesc"></p>
+        <div class="tool-brands" id="tool-brands"></div>
+        <div class="repo-actions">
+          <a class="repo-act is-dl" href="https://lb-tool-web.laufbursche.workers.dev/" target="_blank" rel="noopener" data-t="toolOpen" data-t-attr="title:toolOpenTitle"></a>
+        </div>
+      </div>
+
+      <p class="hint repo-status" id="repo-status" aria-live="polite" hidden></p>
+
+      <div id="active-wrap" hidden>
+        <h2 class="area-divider" data-t="reposTitle"></h2>
+        <div class="cat-cards" id="active-cats"></div>
+      </div>
+
+      <div id="archived-wrap" hidden>
+        <h2 class="area-divider" data-t="archivedTitle"></h2>
+        <div class="cat-cards" id="archived-cats"></div>
+      </div>
+
+      <p class="hint"><a id="all-repos" href="https://github.com/Laufbursche42?tab=repositories" target="_blank" rel="noopener" data-t="reposAll"></a></p>
     </section>
 
     <section class="area-about">
@@ -113,7 +133,7 @@
   </footer>
 </div>
 
-<script src="i18n.js?v=1"></script>
-<script src="app.js?v=1"></script>
+<script src="i18n.js?v=8"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>

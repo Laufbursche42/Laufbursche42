@@ -25,13 +25,13 @@ const FALLBACK_REPOS = [
   { name: 'leat', description: 'Telemetry Data Charts for tr-lb-edition route and ride recordings.', language: 'Go', stargazers_count: 0, hasPages: false,
     downloads: { win: RELEASE_BASE + 'leat/releases/latest', mac: RELEASE_BASE + 'leat/releases/latest', linux: RELEASE_BASE + 'leat/releases/latest' } },
   { name: 'navee-unlock', description: 'Navee Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
-  { name: 'sf-unlock', description: 'SoFlow Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
-  { name: 'tb-unlock', description: 'Trittbrett Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
+  { name: 'sf-unlock', description: 'SoFlow Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true, archived: true },
+  { name: 'tb-unlock', description: 'Trittbrett Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true, archived: true },
   { name: 'tr-fw', description: 'Laufbursche Edition Firmware Patcher for Teverun Fighter Mini (eKFV)', language: 'JavaScript', stargazers_count: 2, hasPages: true },
   { name: 'tr-lb-edition', description: 'Alternative Android APP for Teverun E-Scooters', language: 'Java', stargazers_count: 4, hasPages: false,
     downloads: { apk: RELEASE_BASE + 'tr-lb-edition/releases/latest' } },
-  { name: 'trbm-unlock', description: 'Trittbrett Mini Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true },
-  { name: 'trfm-unlock', description: 'Laufbursche Edition Teverun Fighter Mini (eKFV) unlock', language: 'JavaScript', stargazers_count: 2, hasPages: true },
+  { name: 'trbm-unlock', description: 'Trittbrett Mini Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true, archived: true },
+  { name: 'trfm-unlock', description: 'Laufbursche Edition Teverun Fighter Mini (eKFV) unlock', language: 'JavaScript', stargazers_count: 2, hasPages: true, archived: true },
   { name: 'vr-unlock', description: 'Viron Tool', language: 'JavaScript', stargazers_count: 0, hasPages: true }
 ];
 
@@ -41,6 +41,19 @@ const LANG_COLORS = {
   Python: '#3572A5', C: '#555555', 'C++': '#f34b7d', HTML: '#e34c26', CSS: '#563d7c',
   Shell: '#89e051', Kotlin: '#A97BFF', Dart: '#00B4AB', Rust: '#dea584'
 };
+
+// Featured "Laufbursche Tool (Web)" card: manufacturers/models from the lb-tool-web registry.
+const TOOL_URL = 'https://lb-tool-web.laufbursche.workers.dev/';
+const TOOL_BRANDS = [
+  { name: 'Teverun',    models: ['Blade Mini Ultra (eKFV)', 'Fighter Mini PRO (eKFV)'] },
+  { name: 'Trittbrett', models: ['Hilde 1', 'Hilde 2'], untested: ['FRITZ (TBT4275)', 'PAUL (TBT4126)', 'SULTAN (TBT4495)', 'KALLE v2 (TBT4243)', 'EMMA v2 (TBT4245)', 'KALLE/EMMA v1 (TBT4130)'] },
+  { name: 'SoFlow',     models: ['SO1', 'SO2 Air', 'SO2 Air 2', 'SO2 Zero', 'SO2 Grover', 'SO2+ Grover', 'SO3', 'SO4', 'SO4 UL', 'SO4 Pro GT/GT2', 'SO4 Pro Core2', 'SO4 Pro Max', 'SO4 Pro Max 2', 'SO5', 'SO5 Pro', 'SO6', 'SO X', 'SO myTIER', 'SO One', 'SO One+', 'SO One Pro', 'SO One Lite', 'SO One Lite Pro', 'SO One Prime', 'SO One Prime Max'] },
+  { name: 'NAVEE',      models: ['XT5 Pro', 'XT5 Ultra', 'XT5 Max', 'NT5 Ultra X', 'NT5 Max', 'NT5 Max+', 'NT5 Ultra', 'NT5 Turbo'] },
+  { name: 'IO HAWK',    models: ['Elite X 2.0'], info: true },
+  { name: 'NIU',        models: ['KQi 300X', 'KQi2 Pro', 'KQi3 Max', 'KQi3 Pro', 'KQi3 Sport'], info: true }
+];
+const TOOL_HAY = ('laufbursche tool web lb-tool-web ' +
+  TOOL_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ')).join(' ')).toLowerCase();
 
 function t(key) {
   const dict = window.I18N[lang] || window.I18N.de;
@@ -69,6 +82,7 @@ function applyLang() {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
 
+  renderToolBrands();
   renderRepos(); // refresh loading/error text and button labels
 }
 
@@ -123,6 +137,39 @@ function repoMatches(r, q) {
   return q.split(/\s+/).filter(Boolean).every((term) => hay.includes(term));
 }
 
+// Featured tool card matches when every search term is in its manufacturers/models/name.
+function toolMatches(q) {
+  return q.split(/\s+/).filter(Boolean).every((term) => TOOL_HAY.includes(term));
+}
+
+// Fill the featured tool card: one line per manufacturer with its models.
+function renderToolBrands() {
+  const host = $('tool-brands');
+  if (!host) return;
+  host.textContent = '';
+  TOOL_BRANDS.forEach((b) => {
+    const row = document.createElement('div');
+    row.className = 'tb-line';
+    const nm = document.createElement('b');
+    nm.textContent = b.name;
+    row.appendChild(nm);
+    if (b.info) {
+      const tag = document.createElement('span');
+      tag.className = 'tb-info';
+      tag.textContent = ' (Info)';
+      row.appendChild(tag);
+    }
+    row.appendChild(document.createTextNode(' ' + b.models.join(', ')));
+    if (b.untested && b.untested.length) {
+      const u = document.createElement('span');
+      u.className = 'tb-untested';
+      u.textContent = ' · ' + t('untestedLabel') + ': ' + b.untested.join(', ');
+      row.appendChild(u);
+    }
+    host.appendChild(row);
+  });
+}
+
 // small pill link for a card's action bar.
 function actPill(label, title, href, cls) {
   const a = document.createElement('a');
@@ -144,6 +191,7 @@ function repoCard(r) {
   // it via z-index.
   const card = document.createElement('div');
   card.className = 'repo';
+  if (r.archived) card.classList.add('repo-archived');
 
   const top = document.createElement('div');
   top.className = 'repo-top';
@@ -195,53 +243,95 @@ function repoCard(r) {
   if (dl.mac) actions.appendChild(actPill(t('dlMac'), t('dlMacTitle'), dl.mac, 'is-dl'));
   if (dl.linux) actions.appendChild(actPill(t('dlLinux'), t('dlLinuxTitle'), dl.linux, 'is-dl'));
 
-  actions.appendChild(actPill(t('issueNew'), t('issueNewTitle'), repoUrl + '/issues/new', 'is-issue'));
+  // Archived repos take no new issues, so their report link points at the central profile repo.
+  const issueUrl = (r.archived ? 'https://github.com/' + GH_USER + '/' + GH_USER : repoUrl) + '/issues/new';
+  actions.appendChild(actPill(t('issueNew'), t('issueNewTitle'), issueUrl, 'is-issue'));
   card.appendChild(actions);
 
   return card;
 }
 
+// Repo categories by name: Webpatcher (-fw), Android (-lb-edition), Web-Apps (-unlock), rest = Sonstiges.
+const CATS = [
+  { key: 'fw',      titleKey: 'webpatcherTitle', match: (n) => /-fw$/.test(n) },
+  { key: 'android', titleKey: 'androidTitle',    match: (n) => /-lb-edition/.test(n) },
+  { key: 'webapp',  titleKey: 'webappTitle',     match: (n) => /-unlock$/.test(n) },
+  { key: 'other',   titleKey: 'otherTitle',      match: () => true }
+];
+function catOf(name) {
+  for (let i = 0; i < CATS.length; i++) if (CATS[i].match(name)) return CATS[i].key;
+  return 'other';
+}
+
+// Build one category card (title + count + repo list), or null when nothing is left to show.
+function catCard(titleKey, repos, q) {
+  const shown = q ? repos.filter((r) => repoMatches(r, q)) : repos;
+  if (!shown.length) return null;
+  const card = document.createElement('div');
+  card.className = 'card';
+  const head = document.createElement('div');
+  head.className = 'card-head';
+  const h2 = document.createElement('h2');
+  h2.textContent = t(titleKey);
+  const cnt = document.createElement('span');
+  cnt.className = 'count';
+  cnt.textContent = q ? (shown.length + ' / ' + repos.length) : String(repos.length);
+  head.appendChild(h2);
+  head.appendChild(cnt);
+  const ul = document.createElement('ul');
+  ul.className = 'repo-list';
+  shown.forEach((r) => { const li = document.createElement('li'); li.appendChild(repoCard(r)); ul.appendChild(li); });
+  card.appendChild(head);
+  card.appendChild(ul);
+  return card;
+}
+
+// Fill a wrapper with one card per non-empty category; returns whether anything was shown.
+function fillCats(host, repos, q) {
+  host.textContent = '';
+  let any = false;
+  CATS.forEach((c) => {
+    const inCat = repos.filter((r) => catOf(r.name) === c.key)
+      .sort((a, b) => (a.archived === b.archived) ? 0 : (a.archived ? 1 : -1));   // discontinued last
+    const card = catCard(c.titleKey, inCat, q);
+    if (card) { host.appendChild(card); any = true; }
+  });
+  return any;
+}
+
 function renderRepos() {
-  const list = $('repo-list');
-  const count = $('repo-count');
-  if (!list) return;
-  list.textContent = '';
-
-  if (repoState.status === 'loading') {
-    const li = document.createElement('li');
-    li.className = 'repo-loading';
-    li.textContent = t('reposLoading');
-    list.appendChild(li);
-    if (count) count.textContent = '';
-    return;
-  }
-
-  if (repoState.status === 'error') {
-    const li = document.createElement('li');
-    li.className = 'repo-loading';
-    li.textContent = t('reposError');
-    list.appendChild(li);
-  }
+  const toolCard = $('tool-card');
+  const status = $('repo-status');
+  const activeWrap = $('active-wrap'), activeCats = $('active-cats');
+  const archWrap = $('archived-wrap'), archCats = $('archived-cats');
+  if (!activeCats) return;
 
   const q = repoQuery.trim().toLowerCase();
-  const shown = q ? repoState.repos.filter((r) => repoMatches(r, q)) : repoState.repos;
 
-  shown.forEach((r) => {
-    const li = document.createElement('li');
-    li.appendChild(repoCard(r));
-    list.appendChild(li);
-  });
+  // Featured tool card: hidden under a search only when nothing in it matches.
+  if (toolCard) toolCard.hidden = !!q && !toolMatches(q);
+  if (status) status.hidden = true;
+  if (activeWrap) activeWrap.hidden = true;
+  if (archWrap) archWrap.hidden = true;
 
-  if (q && shown.length === 0) {
-    const li = document.createElement('li');
-    li.className = 'repo-loading';
-    li.textContent = t('reposNoMatch');
-    list.appendChild(li);
+  if (repoState.status === 'loading') {
+    if (status) { status.hidden = false; status.textContent = t('reposLoading'); }
+    return;
+  }
+  if (repoState.status === 'error' && status) {
+    status.hidden = false; status.textContent = t('reposError');
   }
 
-  if (count) {
-    const total = repoState.repos.length;
-    count.textContent = total ? (q ? shown.length + ' / ' + total : String(total)) : '';
+  // Two groups (public / public archived), each split into the same category rubrics.
+  const active = repoState.repos.filter((r) => !r.archived);
+  const archived = repoState.repos.filter((r) => r.archived);
+  const anyActive = fillCats(activeCats, active, q);
+  if (activeWrap) activeWrap.hidden = !anyActive;
+  const anyArch = fillCats(archCats, archived, q);
+  if (archWrap) archWrap.hidden = !anyArch;
+
+  if (q && !anyActive && !anyArch && repoState.status === 'ok' && status) {
+    status.hidden = false; status.textContent = t('reposNoMatch');
   }
 }
 
@@ -259,19 +349,17 @@ async function fetchDownloads(name) {
   } catch (e) {}
 
   try {
+    // List endpoint, not /releases/latest: repos without a release return 200 + [] instead of 404.
     const res = await fetch(
-      'https://api.github.com/repos/' + GH_USER + '/' + name + '/releases/latest',
+      'https://api.github.com/repos/' + GH_USER + '/' + name + '/releases?per_page=1',
       { headers: { Accept: 'application/vnd.github+json' } }
     );
     if (res.ok) {
-      const rel = await res.json();
-      const d = classifyAssets(rel.assets);
+      const arr = await res.json();
+      const rel = Array.isArray(arr) && arr.length ? arr[0] : null;
+      const d = rel ? classifyAssets(rel.assets) : {};
       try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d })); } catch (e) {}
       return d;
-    }
-    if (res.status === 404) {
-      try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d: {} })); } catch (e) {}
-      return {};
     }
   } catch (e) {}
   return {};
@@ -280,7 +368,7 @@ async function fetchDownloads(name) {
 // loads the downloads of all shown repos in parallel, then re-renders.
 async function loadReleases() {
   if (repoState.status !== 'ok') return;
-  const repos = repoState.repos;
+  const repos = repoState.repos.filter((r) => !r.archived);   // archived repos ship no downloads
   await Promise.all(repos.map(async (r) => {
     r.downloads = await fetchDownloads(r.name);
   }));
@@ -296,7 +384,7 @@ async function loadRepos() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
     const repos = data
-      .filter((r) => !r.fork && !r.archived && r.name.toLowerCase() !== GH_USER.toLowerCase())
+      .filter((r) => !r.fork && r.name.toLowerCase() !== GH_USER.toLowerCase())
       .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
       .map((r) => ({
         name: r.name,
@@ -305,6 +393,7 @@ async function loadRepos() {
         stargazers_count: r.stargazers_count,
         hasPages: !!r.has_pages,
         homepage: r.homepage || '',
+        archived: !!r.archived,
         pageUrl: null,
         downloads: null
       }));
