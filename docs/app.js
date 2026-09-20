@@ -55,6 +55,14 @@ const TOOL_BRANDS = [
 const TOOL_HAY = ('laufbursche tool web lb-tool-web ' +
   TOOL_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ')).join(' ')).toLowerCase();
 
+// Featured "Laufbursche Webpatcher" card: NAVEE + Teverun models from the lb-webpatcher registry.
+const WEBPATCHER_BRANDS = [
+  { name: 'NAVEE',   models: ['NT5 Max', 'NT5 Max+', 'NT5 Ultra', 'NT5 Turbo', 'NT5 Ultra X', 'XT5 Pro', 'XT5 Ultra', 'XT5 Max'] },
+  { name: 'Teverun', models: ['Fighter Mini (eKFV)'] }
+];
+const WEBPATCHER_HAY = ('laufbursche webpatcher lb-webpatcher ' +
+  WEBPATCHER_BRANDS.map((b) => b.name + ' ' + b.models.join(' ')).join(' ')).toLowerCase();
+
 function t(key) {
   const dict = window.I18N[lang] || window.I18N.de;
   return dict[key] != null ? dict[key] : key;
@@ -80,7 +88,8 @@ function applyLang() {
     b.setAttribute('aria-pressed', String(b.dataset.lang === lang));
   });
 
-  renderToolBrands();
+  renderBrands('tool-brands', TOOL_BRANDS);
+  renderBrands('webpatcher-brands', WEBPATCHER_BRANDS);
   renderContact();
   renderRepos(); // refresh loading/error text and button labels
 }
@@ -148,17 +157,20 @@ function repoMatches(r, q) {
   return q.split(/\s+/).filter(Boolean).every((term) => hay.includes(term));
 }
 
-// Featured tool card matches when every search term is in its manufacturers/models/name.
+// A featured card matches when every search term is in its manufacturers/models/name.
 function toolMatches(q) {
   return q.split(/\s+/).filter(Boolean).every((term) => TOOL_HAY.includes(term));
 }
+function webpatcherMatches(q) {
+  return q.split(/\s+/).filter(Boolean).every((term) => WEBPATCHER_HAY.includes(term));
+}
 
-// Fill the featured tool card: one line per manufacturer with its models.
-function renderToolBrands() {
-  const host = $('tool-brands');
+// Fill a featured card's brand list: one line per manufacturer with its models.
+function renderBrands(hostId, brands) {
+  const host = $(hostId);
   if (!host) return;
   host.textContent = '';
-  TOOL_BRANDS.forEach((b) => {
+  brands.forEach((b) => {
     const row = document.createElement('div');
     row.className = 'tb-line';
     const nm = document.createElement('b');
@@ -312,6 +324,7 @@ function fillCats(host, repos, q) {
 
 function renderRepos() {
   const toolCard = $('tool-card');
+  const webpatcherCard = $('webpatcher-card');
   const status = $('repo-status');
   const activeWrap = $('active-wrap'), activeCats = $('active-cats');
   const archWrap = $('archived-wrap'), archCats = $('archived-cats');
@@ -319,8 +332,9 @@ function renderRepos() {
 
   const q = repoQuery.trim().toLowerCase();
 
-  // Featured tool card: hidden under a search only when nothing in it matches.
+  // Featured cards: hidden under a search only when nothing in them matches.
   if (toolCard) toolCard.hidden = !!q && !toolMatches(q);
+  if (webpatcherCard) webpatcherCard.hidden = !!q && !webpatcherMatches(q);
   if (status) status.hidden = true;
   if (activeWrap) activeWrap.hidden = true;
   if (archWrap) archWrap.hidden = true;

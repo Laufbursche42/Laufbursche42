@@ -25,6 +25,9 @@ window.I18N = {
     untestedLabel: "ungetestet",
     toolOpen: "Zum Tool",
     toolOpenTitle: "Laufbursche Tool (Web) öffnen",
+    webpatcherDesc: "Web-Bluetooth-Firmware-Patcher für NAVEE und Teverun. Unterstützte Scooter je Marke:",
+    webpatcherOpen: "Zum Tool",
+    webpatcherOpenTitle: "Laufbursche Webpatcher öffnen",
 
     aboutTitle: "Über mich",
     aboutIntro: "Hi, ich bin Laufbursche42. Ich schraube an E-Scootern und baue Werkzeuge, mit denen sich Fahrzeuge verschiedener Hersteller auslesen, konfigurieren und tunen lassen.",
@@ -94,6 +97,9 @@ window.I18N = {
     untestedLabel: "untested",
     toolOpen: "Open tool",
     toolOpenTitle: "Open the Laufbursche Tool (Web)",
+    webpatcherDesc: "Web Bluetooth firmware patcher for NAVEE and Teverun. Supported scooters per brand:",
+    webpatcherOpen: "Open tool",
+    webpatcherOpenTitle: "Open the Laufbursche Webpatcher",
 
     aboutTitle: "About me",
     aboutIntro: "Hi, I am Laufbursche42. I tinker with e-scooters and build tools that read out, configure and tune vehicles from various manufacturers.",
