@@ -64,11 +64,7 @@ function applyLang() {
   document.documentElement.lang = lang;
   document.title = t('pageTitle');
 
-  document.querySelectorAll('[data-t]').forEach((el) => {
-    const key = el.getAttribute('data-t');
-    const val = t(key);
-    if (/Html$/.test(key)) el.innerHTML = val; else el.textContent = val;   // scan-ok: our own i18n table
-  });
+  document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = t(el.getAttribute('data-t')); });
   document.querySelectorAll('[data-t-attr]').forEach((el) => {
     const spec = el.getAttribute('data-t-attr'); // form "attr:key"
     const [attr, key] = spec.split(':');
@@ -85,7 +81,20 @@ function applyLang() {
   });
 
   renderToolBrands();
+  renderContact();
   renderRepos(); // refresh loading/error text and button labels
+}
+
+// Contact paragraph: build the two links with DOM APIs, no innerHTML sink.
+function renderContact() {
+  const p = $('about-contact'); if (!p) return;
+  p.textContent = '';
+  const mk = (href, label) => { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; return a; };
+  p.appendChild(document.createTextNode(t('contactPre')));
+  p.appendChild(mk('https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/', t('contactForum')));
+  p.appendChild(document.createTextNode(t('contactMid')));
+  p.appendChild(mk('https://github.com/Laufbursche42/Laufbursche42/issues/new', t('contactIssue')));
+  p.appendChild(document.createTextNode(t('contactPost')));
 }
 
 function setLang(next) {
