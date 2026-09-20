@@ -103,7 +103,7 @@ window.WEBPATCHER_BRANDS = [
   {
     "name": "Teverun",
     "models": [
-      "Fighter Mini (eKFV)"
+      "Fighter Mini PRO (eKFV)"
     ]
   },
   {
