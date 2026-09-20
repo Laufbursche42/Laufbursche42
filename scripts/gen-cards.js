@@ -26,10 +26,15 @@ function loadRegistry(file) {
 // lb-tool-web: one entry per manufacturer, models[] carry a `tested` flag; kind 'static' = info page.
 function toolBrands(reg) {
   return reg.map(function (m) {
+    var brand = (m.brand && m.brand.title) || m.name;
+    // Some labels repeat the brand ("NIU KQi 300X", "IO HAWK Elite X 2.0"); the card shows the brand
+    // in bold already, so strip a leading brand prefix to avoid doubling it.
+    var re = new RegExp('^' + brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s+', 'i');
+    var lab = function (x) { return x.label.replace(re, ''); };
     var models = m.models || [];
-    var tested = models.filter(function (x) { return x.tested; }).map(function (x) { return x.label; });
-    var untested = models.filter(function (x) { return !x.tested; }).map(function (x) { return x.label; });
-    var o = { name: (m.brand && m.brand.title) || m.name };
+    var tested = models.filter(function (x) { return x.tested; }).map(lab);
+    var untested = models.filter(function (x) { return !x.tested; }).map(lab);
+    var o = { name: brand };
     o.models = tested;
     if (untested.length) o.untested = untested;
     if (m.kind === 'static') o.info = true;

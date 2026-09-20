@@ -79,19 +79,20 @@ window.TOOL_BRANDS = [
   {
     "name": "IO HAWK",
     "models": [
-      "IO HAWK Elite X 2.0"
+      "Elite X 2.0"
     ],
     "info": true
   },
   {
     "name": "NIU",
-    "models": [],
+    "models": [
+      "KQi 300X"
+    ],
     "untested": [
-      "NIU KQi 300X",
-      "NIU KQi2 Pro",
-      "NIU KQi3 Max",
-      "NIU KQi3 Pro",
-      "NIU KQi3 Sport"
+      "KQi2 Pro",
+      "KQi3 Max",
+      "KQi3 Pro",
+      "KQi3 Sport"
     ],
     "info": true
   }
