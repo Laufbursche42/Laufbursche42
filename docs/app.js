@@ -167,9 +167,9 @@ function renderBrands(hostId, brands) {
     g.className = 'tb-grp ' + cls;
     const lbl = document.createElement('span');
     lbl.className = 'tb-lbl';
-    lbl.textContent = t(labelKey) + ': ';
+    lbl.textContent = t(labelKey);   // only the word is underlined
     g.appendChild(lbl);
-    g.appendChild(document.createTextNode(list.join(', ')));
+    g.appendChild(document.createTextNode(': ' + list.join(', ')));   // colon, space and models stay plain
     row.appendChild(g);
   };
   brands.forEach((b) => {
