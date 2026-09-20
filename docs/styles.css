@@ -74,8 +74,10 @@ h1 span { color: var(--accent); }
 .card.feature .repo-actions { justify-content: center; }
 .tool-brands { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; color: var(--muted); }
 .tool-brands .tb-line b { color: var(--text); }
-.tool-brands .tb-info { color: var(--muted); }
+.tool-brands .tb-grp { line-height: 1.35; }
+.tool-brands .tb-lbl { text-decoration: underline; }
 .tool-brands .tb-untested { font-style: italic; opacity: .9; }
+.tool-brands .tb-unsupported { font-style: italic; opacity: .7; }
 .cat-cards { display: flex; flex-direction: column; gap: 16px; }
 #active-wrap, #archived-wrap { display: flex; flex-direction: column; gap: 16px; }
 .area-divider { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin: 0; }

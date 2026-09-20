@@ -47,11 +47,11 @@ const LANG_COLORS = {
 const TOOL_URL = 'https://lb-tool-web.laufbursche.workers.dev/';
 const TOOL_BRANDS = window.TOOL_BRANDS || [];
 const TOOL_HAY = ('laufbursche tool web lb-tool-web ' +
-  TOOL_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ')).join(' ')).toLowerCase();
+  TOOL_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ') + ' ' + (b.unsupported || []).join(' ')).join(' ')).toLowerCase();
 
 const WEBPATCHER_BRANDS = window.WEBPATCHER_BRANDS || [];
 const WEBPATCHER_HAY = ('laufbursche webpatcher lb-webpatcher ' +
-  WEBPATCHER_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ')).join(' ')).toLowerCase();
+  WEBPATCHER_BRANDS.map((b) => b.name + ' ' + b.models.join(' ') + ' ' + (b.untested || []).join(' ') + ' ' + (b.unsupported || []).join(' ')).join(' ')).toLowerCase();
 
 function t(key) {
   const dict = window.I18N[lang] || window.I18N.de;
@@ -160,25 +160,27 @@ function renderBrands(hostId, brands) {
   const host = $(hostId);
   if (!host) return;
   host.textContent = '';
+  // one labelled line per status group; models flow as comma text after the label
+  const addGroup = (row, labelKey, list, cls) => {
+    if (!list || !list.length) return;
+    const g = document.createElement('div');
+    g.className = 'tb-grp ' + cls;
+    const lbl = document.createElement('span');
+    lbl.className = 'tb-lbl';
+    lbl.textContent = t(labelKey) + ': ';
+    g.appendChild(lbl);
+    g.appendChild(document.createTextNode(list.join(', ')));
+    row.appendChild(g);
+  };
   brands.forEach((b) => {
     const row = document.createElement('div');
     row.className = 'tb-line';
     const nm = document.createElement('b');
     nm.textContent = b.name;
     row.appendChild(nm);
-    if (b.info) {
-      const tag = document.createElement('span');
-      tag.className = 'tb-info';
-      tag.textContent = ' (Info)';
-      row.appendChild(tag);
-    }
-    if (b.models && b.models.length) row.appendChild(document.createTextNode(' ' + b.models.join(', ')));
-    if (b.untested && b.untested.length) {
-      const u = document.createElement('span');
-      u.className = 'tb-untested';
-      u.textContent = (b.models && b.models.length ? ' · ' : ' ') + t('untestedLabel') + ': ' + b.untested.join(', ');
-      row.appendChild(u);
-    }
+    addGroup(row, 'testedLabel', b.models, 'tb-tested');
+    addGroup(row, 'untestedLabel', b.untested, 'tb-untested');
+    addGroup(row, 'unsupportedLabel', b.unsupported, 'tb-unsupported');
     host.appendChild(row);
   });
 }

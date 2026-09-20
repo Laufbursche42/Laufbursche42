@@ -13,7 +13,9 @@ window.TOOL_BRANDS = [
       "PAUL (TBT4126)",
       "SULTAN (TBT4495)",
       "KALLE v2 (TBT4243)",
-      "EMMA v2 (TBT4245)",
+      "EMMA v2 (TBT4245)"
+    ],
+    "unsupported": [
       "KALLE/EMMA v1 (TBT4130)"
     ]
   },
@@ -22,7 +24,6 @@ window.TOOL_BRANDS = [
     "models": [
       "SO5",
       "SO5 Pro",
-      "SO6",
       "SO4 Pro GT/GT2",
       "SO4 Pro Core2",
       "SO4 Pro Max",
@@ -32,7 +33,6 @@ window.TOOL_BRANDS = [
       "SO4",
       "SO myTIER",
       "SO X",
-      "SO4 UL",
       "SO1",
       "SO2 Air",
       "SO2 Air 2nd gen",
@@ -47,6 +47,10 @@ window.TOOL_BRANDS = [
       "SO One Lite Pro",
       "SO One Prime",
       "SO One Prime Max"
+    ],
+    "unsupported": [
+      "SO4 UL",
+      "SO6"
     ]
   },
   {
@@ -80,8 +84,7 @@ window.TOOL_BRANDS = [
     "name": "IO HAWK",
     "models": [
       "Elite X 2.0"
-    ],
-    "info": true
+    ]
   },
   {
     "name": "NIU",
@@ -93,8 +96,7 @@ window.TOOL_BRANDS = [
       "KQi3 Max",
       "KQi3 Pro",
       "KQi3 Sport"
-    ],
-    "info": true
+    ]
   }
 ];
 window.WEBPATCHER_BRANDS = [

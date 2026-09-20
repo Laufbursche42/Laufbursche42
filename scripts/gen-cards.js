@@ -32,12 +32,16 @@ function toolBrands(reg) {
     var re = new RegExp('^' + brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s+', 'i');
     var lab = function (x) { return x.label.replace(re, ''); };
     var models = m.models || [];
-    var tested = models.filter(function (x) { return x.tested; }).map(lab);
-    var untested = models.filter(function (x) { return !x.tested; }).map(lab);
+    // caps.bleSpeed === false = no BLE speed path -> "not supported" (SO6, SO4 UL, Trittbrett legacy).
+    var isUnsup = function (x) { return x.caps && x.caps.bleSpeed === false; };
+    var unsupported = models.filter(isUnsup).map(lab);
+    var rest = models.filter(function (x) { return !isUnsup(x); });
+    var tested = rest.filter(function (x) { return x.tested; }).map(lab);
+    var untested = rest.filter(function (x) { return !x.tested; }).map(lab);
     var o = { name: brand };
     o.models = tested;
     if (untested.length) o.untested = untested;
-    if (m.kind === 'static') o.info = true;
+    if (unsupported.length) o.unsupported = unsupported;
     return o;
   });
 }
