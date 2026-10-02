@@ -73,6 +73,7 @@ window.I18N = {
     dlMacTitle: "Neueste macOS-Version herunterladen",
     dlLinux: "Linux",
     dlLinuxTitle: "Neueste Linux-Version herunterladen",
+    dlCountTitle: "Downloads aller Releases (App-Dateien, von GitHub gezählt)",
 
     linksTitle: "Links"
   },
@@ -147,6 +148,7 @@ window.I18N = {
     dlMacTitle: "Download latest macOS build",
     dlLinux: "Linux",
     dlLinuxTitle: "Download latest Linux build",
+    dlCountTitle: "Downloads across all releases (app files, counted by GitHub)",
 
     linksTitle: "Links"
   }

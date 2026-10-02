@@ -120,6 +120,31 @@ function computePageUrl(r) {
   return null;
 }
 
+// Platform matchers for a release asset's file name. Shared by classifyAssets
+// (first match per platform -> download button) and sumDownloads (the counter).
+const PLAT_MATCH = {
+  apk:   (n) => n.endsWith('.apk'),
+  win:   (n) => n.endsWith('.exe') || n.endsWith('.msi') || /(^|[-_.])win(dows|64|32)?([-_.]|$)/.test(n),
+  mac:   (n) => n.endsWith('.dmg') || n.endsWith('.pkg') || /(^|[-_.])(mac(os)?|osx|darwin)([-_.]|$)/.test(n),
+  linux: (n) => n.endsWith('.appimage') || n.endsWith('.deb') || n.endsWith('.rpm') || /(^|[-_.])linux([-_.]|$)/.test(n)
+};
+
+// True for an installable app binary (apk / desktop), not a data file like a POI
+// or map database - so the download counter ignores those.
+function isAppAsset(name) {
+  const n = (name || '').toLowerCase();
+  return PLAT_MATCH.apk(n) || PLAT_MATCH.win(n) || PLAT_MATCH.mac(n) || PLAT_MATCH.linux(n);
+}
+
+// Sums GitHub's own download_count over every app-binary asset of all releases.
+function sumDownloads(releases) {
+  let total = 0;
+  (releases || []).forEach((rel) => (rel.assets || []).forEach((a) => {
+    if (isAppAsset(a.name) && typeof a.download_count === 'number') total += a.download_count;
+  }));
+  return total;
+}
+
 // Maps release files to a platform by their name. First matching file per
 // platform wins.
 function classifyAssets(assets) {
@@ -128,12 +153,27 @@ function classifyAssets(assets) {
     const n = (a.name || '').toLowerCase();
     const url = a.browser_download_url;
     if (!url) return;
-    if (!out.apk && n.endsWith('.apk')) out.apk = url;
-    else if (!out.win && (n.endsWith('.exe') || n.endsWith('.msi') || /(^|[-_.])win(dows|64|32)?([-_.]|$)/.test(n))) out.win = url;
-    else if (!out.mac && (n.endsWith('.dmg') || n.endsWith('.pkg') || /(^|[-_.])(mac(os)?|osx|darwin)([-_.]|$)/.test(n))) out.mac = url;
-    else if (!out.linux && (n.endsWith('.appimage') || n.endsWith('.deb') || n.endsWith('.rpm') || /(^|[-_.])linux([-_.]|$)/.test(n))) out.linux = url;
+    if (!out.apk && PLAT_MATCH.apk(n)) out.apk = url;
+    else if (!out.win && PLAT_MATCH.win(n)) out.win = url;
+    else if (!out.mac && PLAT_MATCH.mac(n)) out.mac = url;
+    else if (!out.linux && PLAT_MATCH.linux(n)) out.linux = url;
   });
   return out;
+}
+
+// Small inline download icon (SVG, inherits currentColor; no innerHTML sink).
+function dlIcon() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '12'); svg.setAttribute('height', '12');
+  svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2.2'); svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round'); svg.setAttribute('aria-hidden', 'true');
+  const p = document.createElementNS(NS, 'path');
+  p.setAttribute('d', 'M12 3v10M8 11l4 4 4-4M5 20h14');
+  svg.appendChild(p);
+  return svg;
 }
 
 // repo data state so a language switch can re-render.
@@ -222,6 +262,16 @@ function repoCard(r) {
     star.className = 'repo-star';
     star.textContent = '★ ' + r.stargazers_count;
     top.appendChild(star);
+  }
+  if (r.dlCount > 0) {
+    const dl = document.createElement('span');
+    dl.className = 'repo-dl';
+    dl.title = t('dlCountTitle');
+    dl.appendChild(dlIcon());
+    const num = document.createElement('span');
+    num.textContent = r.dlCount.toLocaleString(lang === 'de' ? 'de-DE' : 'en-US');
+    dl.appendChild(num);
+    top.appendChild(dl);
   }
   card.appendChild(top);
 
@@ -361,25 +411,30 @@ async function fetchDownloads(name) {
     const raw = localStorage.getItem(LS_REL_PREFIX + name);
     if (raw) {
       const c = JSON.parse(raw);
-      if (c && typeof c.t === 'number' && (Date.now() - c.t) < REL_TTL) return c.d || {};
+      if (c && typeof c.t === 'number' && (Date.now() - c.t) < REL_TTL) {
+        return { d: c.d || {}, c: typeof c.c === 'number' ? c.c : 0 };
+      }
     }
   } catch (e) {}
 
   try {
-    // List endpoint, not /releases/latest: repos without a release return 200 + [] instead of 404.
+    // All releases (per_page=100): arr[0] drives the latest-version download
+    // buttons, the counter sums download_count over every release. Repos without
+    // a release return 200 + [] instead of 404.
     const res = await fetch(
-      'https://api.github.com/repos/' + GH_USER + '/' + name + '/releases?per_page=1',
+      'https://api.github.com/repos/' + GH_USER + '/' + name + '/releases?per_page=100',
       { headers: { Accept: 'application/vnd.github+json' } }
     );
     if (res.ok) {
       const arr = await res.json();
       const rel = Array.isArray(arr) && arr.length ? arr[0] : null;
       const d = rel ? classifyAssets(rel.assets) : {};
-      try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d })); } catch (e) {}
-      return d;
+      const cnt = Array.isArray(arr) ? sumDownloads(arr) : 0;
+      try { localStorage.setItem(LS_REL_PREFIX + name, JSON.stringify({ t: Date.now(), d, c: cnt })); } catch (e) {}
+      return { d, c: cnt };
     }
   } catch (e) {}
-  return {};
+  return { d: {}, c: 0 };
 }
 
 // loads the downloads of all shown repos in parallel, then re-renders.
@@ -387,7 +442,9 @@ async function loadReleases() {
   if (repoState.status !== 'ok') return;
   const repos = repoState.repos.filter((r) => !r.archived);   // archived repos ship no downloads
   await Promise.all(repos.map(async (r) => {
-    r.downloads = await fetchDownloads(r.name);
+    const info = await fetchDownloads(r.name);
+    r.downloads = info.d;
+    r.dlCount = info.c;
   }));
   renderRepos();
 }
@@ -412,7 +469,8 @@ async function loadRepos() {
         homepage: r.homepage || '',
         archived: !!r.archived,
         pageUrl: null,
-        downloads: null
+        downloads: null,
+        dlCount: 0
       }));
     repos.forEach((r) => { r.pageUrl = computePageUrl(r); });
     repoState = { status: 'ok', repos };

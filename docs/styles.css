@@ -122,6 +122,12 @@ h1 span { color: var(--accent); }
 .repo:hover .repo-name { color: var(--accent); }
 .repo-star { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--muted);
   white-space: nowrap; position: relative; }
+/* downloads badge: small icon + count, counted live from the GitHub releases API. */
+.repo-dl { display: inline-flex; align-items: center; gap: 3px; position: relative;
+  font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.repo-dl svg { display: block; opacity: .85; }
+/* when a repo has no star, the badge itself gets pushed to the right edge. */
+.repo-name + .repo-dl { margin-left: auto; }
 .repo-desc { color: var(--muted); font-size: 12.5px; margin: 4px 0 0; }
 .repo-meta { display: flex; align-items: center; gap: 6px; margin-top: 9px; }
 .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--gps); flex: 0 0 auto; }
