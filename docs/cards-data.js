@@ -66,6 +66,7 @@ window.TOOL_BRANDS = [
       "XT5 Pro",
       "XT5 Ultra",
       "XT5 Max",
+      "UT5 Ultra X",
       "NT5 Ultra X",
       "NT5 Max",
       "NT5 Max+",
