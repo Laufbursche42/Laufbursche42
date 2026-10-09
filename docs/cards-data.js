@@ -116,14 +116,16 @@ window.WEBPATCHER_BRANDS = [
       "NT5 Ultra X",
       "XT5 Pro",
       "XT5 Ultra",
-      "XT5 Max"
+      "XT5 Max",
+      "UT5 Max"
     ],
     "untested": [
       "ST3 Pro",
       "GT3 Pro",
       "ST3",
       "GT3",
-      "GT3 Max"
+      "GT3 Max",
+      "NT3 Pro"
     ]
   }
 ];
