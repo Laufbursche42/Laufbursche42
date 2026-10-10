@@ -4,8 +4,8 @@
 // in index.html. German is the default; the switch sits in the header.
 window.I18N = {
   de: {
-    pageTitle: "Laufbursche42",
-    metaDesc: "Laufbursche42 - E-Scooter Tools und Projekte auf GitHub.",
+    pageTitle: "Laufbursche42 - E-Scooter Tools, Firmware-Patcher und Analysen",
+    metaDesc: "Laufbursche42 - kostenlose Web-Bluetooth-Werkzeuge, Firmware-Patcher und Analysen fuer E-Scooter zahlreicher Hersteller. Open Source, ohne Konto, datensparsam.",
     themeToLight: "Auf helle Darstellung umschalten",
     themeToDark: "Auf dunkle Darstellung umschalten",
 
@@ -83,8 +83,8 @@ window.I18N = {
   },
 
   en: {
-    pageTitle: "Laufbursche42",
-    metaDesc: "Laufbursche42 - e-scooter tools and projects on GitHub.",
+    pageTitle: "Laufbursche42 - E-Scooter Tools, Firmware Patcher and Analyses",
+    metaDesc: "Laufbursche42 - free Web-Bluetooth tools, firmware patchers and analyses for e-scooters from many manufacturers. Open source, no account, data-minimal.",
     themeToLight: "Switch to light theme",
     themeToDark: "Switch to dark theme",
 
