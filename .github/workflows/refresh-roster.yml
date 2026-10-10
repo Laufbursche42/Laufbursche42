@@ -1,0 +1,49 @@
+name: Refresh roster
+
+# Rebuilds docs/fallback-repos.js (the live repo + release-download roster) using the
+# auto-generated GITHUB_TOKEN. Runs every 15 minutes + on every push to main + on
+# a release event in this org, so the published site is always fresh without the
+# browser ever calling the GitHub API (unauth = 60/h per visitor IP = 403 flood).
+#
+# GITHUB_TOKEN is NOT a stored repo secret - GitHub mints it per workflow run,
+# scoped to this repo only, and discards it at run end. 5000/h rate limit.
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-roster
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate docs/fallback-repos.js
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/gen-fallback.js
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- docs/fallback-repos.js; then
+            echo "no change"
+            exit 0
+          fi
+          git config user.name  "Laufbursche42"
+          git config user.email "42+Laufbursche42@users.noreply.github.com"
+          git add docs/fallback-repos.js
+          git commit -m "chore: refresh fallback-repos.js [skip ci]"
+          git push
