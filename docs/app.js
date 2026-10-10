@@ -467,6 +467,17 @@ async function loadReleases() {
 }
 
 async function loadRepos() {
+  // Static fallback is generated on every push and already covers 100 % of the public roster,
+  // so there is no reason to burn the unauthenticated 60/h rate limit on first paint. Only call
+  // the API when the fallback is empty (first-time setup / missing fallback-repos.js).
+  if (FALLBACK_REPOS.length) {
+    const repos = FALLBACK_REPOS.map((r) => Object.assign({}, r));
+    repos.forEach((r) => { r.pageUrl = computePageUrl(r); });
+    repoState = { status: 'ok', repos };
+    renderRepos();
+    loadReleases(); // enrich with latest-release downloads
+    return;
+  }
   try {
     const res = await fetch(
       'https://api.github.com/users/' + GH_USER + '/repos?per_page=100&sort=updated',
