@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.62/nv-lb-edition-v1.0.62.apk"
     },
-    "dlCount": 647
+    "dlCount": 648
   },
   {
     "name": "nv-unlock",
