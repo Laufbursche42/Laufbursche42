@@ -4,7 +4,7 @@
 // change (or via a githook). The profile page never hand-maintains these lists.
 //
 //   TOOL_BRANDS       <- lb-tool-web/manufacturers/registry.js   (models[].tested, kind)
-//   WEBPATCHER_BRANDS <- lb-webpatcher/manufacturers/registry.js (experimental flag)
+//   WEBPATCHER_BRANDS <- lb-webpatcher/manufacturers/registry.js (experimental or untested flag)
 //
 // Run: node scripts/gen-cards.js   (needs the sibling lb-tool-web + lb-webpatcher repos)
 
@@ -46,13 +46,15 @@ function toolBrands(reg) {
   });
 }
 
-// lb-webpatcher: one entry per model; experimental = untested. Group by manufacturer, keep first-seen order.
+// lb-webpatcher: one entry per model. Two flags mean "not confirmed on hardware" and both belong in
+// the untested list: `experimental` (no patch step at all, upload-flash only) and `untested` (full
+// patch flow, but never flashed on recoverable hardware). Group by manufacturer, keep first-seen order.
 function webpatcherBrands(reg) {
   var order = [], byBrand = {};
   reg.forEach(function (m) {
     var b = (m.brand && m.brand.title) || m.name;
     if (!byBrand[b]) { byBrand[b] = { name: b, models: [], untested: [] }; order.push(b); }
-    (m.experimental ? byBrand[b].untested : byBrand[b].models).push(m.name);
+    ((m.experimental || m.untested) ? byBrand[b].untested : byBrand[b].models).push(m.name);
   });
   return order.map(function (b) {
     var o = { name: byBrand[b].name, models: byBrand[b].models };

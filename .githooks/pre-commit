@@ -153,6 +153,30 @@ if [ -f "$PD_LIST" ]; then
 fi
 
 # =================================================================
+# PHASE C2 - the model lists must match the tool registries (cards-data.js is generated)
+# =================================================================
+# docs/cards-data.js is written by scripts/gen-cards.js from the lb-tool-web + lb-webpatcher
+# registries. Regenerate it here and block the commit if the result differs from what is staged,
+# so the public support list can never drift away from what the tools actually do.
+if [ -f "$REPO_ROOT/scripts/gen-cards.js" ] && command -v node >/dev/null 2>&1; then
+  if [ -f "$REPO_ROOT/../lb-tool-web/manufacturers/registry.js" ] && [ -f "$REPO_ROOT/../lb-webpatcher/manufacturers/registry.js" ]; then
+    cp "$REPO_ROOT/docs/cards-data.js" "$TMPD/cards-before.js" 2>/dev/null
+    if node "$REPO_ROOT/scripts/gen-cards.js" >"$TMPD/gen.log" 2>&1; then
+      if cmp -s "$TMPD/cards-before.js" "$REPO_ROOT/docs/cards-data.js"; then
+        echo "PASS  [cards] docs/cards-data.js matches the tool registries"
+      else
+        git add "$REPO_ROOT/docs/cards-data.js"
+        echo "FIXED [cards] docs/cards-data.js was stale -> regenerated from the registries and staged"
+      fi
+    else
+      echo "BLOCK [cards] scripts/gen-cards.js failed:"; sed 's/^/        /' "$TMPD/gen.log"; RC=1
+    fi
+  else
+    echo "SKIP  [cards] sibling lb-tool-web / lb-webpatcher checkout not found"
+  fi
+fi
+
+# =================================================================
 # PHASE D - web security scan (XSS/injection sinks, inline handlers, CSP, ...)
 # =================================================================
 if command -v py >/dev/null 2>&1; then PY="py -3"; elif command -v python3 >/dev/null 2>&1; then PY=python3; else PY=python; fi
