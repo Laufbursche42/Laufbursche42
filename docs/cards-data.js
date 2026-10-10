@@ -154,12 +154,12 @@ window.WEBPATCHER_BRANDS = [
       "NT5 Max+",
       "NT5 Ultra",
       "NT5 Turbo",
-      "NT5 Ultra X",
-      "XT5 Pro",
-      "XT5 Ultra",
-      "XT5 Max"
+      "NT5 Ultra X"
     ],
     "untested": [
+      "XT5 Pro",
+      "XT5 Ultra",
+      "XT5 Max",
       "ST3 Pro",
       "GT3 Pro",
       "ST3",
@@ -167,11 +167,34 @@ window.WEBPATCHER_BRANDS = [
       "GT3 Max",
       "NT3 Pro",
       "UT5 Max",
+      "UT5 Ultra X",
       "G5",
       "GT5 Max",
       "GT5 Pro",
       "UT3 Max",
-      "NT3 Max"
+      "NT3 Max",
+      "G5 Max",
+      "G5 Pro",
+      "V45i",
+      "N65i II",
+      "E20 Lite",
+      "E25 Go",
+      "V25 / V25i",
+      "N65i",
+      "V50i Pro",
+      "V40i / V40i Pro",
+      "S40",
+      "S60",
+      "V3 Pro",
+      "V40i Pro II",
+      "S2",
+      "E20",
+      "E25",
+      "E45 Pro",
+      "E60 Pro",
+      "K100 Max",
+      "K100 Pro",
+      "K100"
     ]
   }
 ];
