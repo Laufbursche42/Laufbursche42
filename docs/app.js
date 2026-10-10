@@ -84,15 +84,41 @@ function applyLang() {
   renderRepos(); // refresh loading/error text and button labels
 }
 
-// Contact paragraph: build the two links with DOM APIs, no innerHTML sink.
+// Contact paragraph: build the two links with DOM APIs, no innerHTML sink. The GitHub-issue
+// link opens a prefilled template so the reporter does not stare at an empty issue form.
 function renderContact() {
   const p = $('about-contact'); if (!p) return;
   p.textContent = '';
   const mk = (href, label) => { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; return a; };
+  const isDe = (document.documentElement.getAttribute('lang') || 'en').toLowerCase() === 'de';
+  const F = String.fromCharCode(96, 96, 96);
+  const title = isDe ? '[laufbursche42.github.io] Rueckmeldung' : '[laufbursche42.github.io] Feedback';
+  const body = isDe
+    ? ['**Seite:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href,
+       '', '---', '',
+       '**Worum geht es?**',
+       '- [ ] Fehler / Bug',
+       '- [ ] Vorschlag / Idee',
+       '- [ ] Frage',
+       '- [ ] Etwas anderes',
+       '', '**Beschreibung:**', '', '(bitte beschreiben)',
+       '', '**Browser / System:**', '',
+       '', '**Log oder Screenshot (optional):**', '', F, '', F].join('\n')
+    : ['**Page:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href,
+       '', '---', '',
+       '**What is this about?**',
+       '- [ ] Error / Bug',
+       '- [ ] Suggestion / Idea',
+       '- [ ] Question',
+       '- [ ] Something else',
+       '', '**Description:**', '', '(please describe)',
+       '', '**Browser / system:**', '',
+       '', '**Log or screenshot (optional):**', '', F, '', F].join('\n');
+  const issueUrl = 'https://github.com/Laufbursche42/Laufbursche42/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
   p.appendChild(document.createTextNode(t('contactPre')));
   p.appendChild(mk('https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/', t('contactForum')));
   p.appendChild(document.createTextNode(t('contactMid')));
-  p.appendChild(mk('https://github.com/Laufbursche42/Laufbursche42/issues/new', t('contactIssue')));
+  p.appendChild(mk(issueUrl, t('contactIssue')));
   p.appendChild(document.createTextNode(t('contactPost')));
 }
 
