@@ -79,7 +79,15 @@ window.I18N = {
     dlLinuxTitle: "Neueste Linux-Version herunterladen",
     dlCountTitle: "Downloads aller Releases (App-Dateien, von GitHub gezählt)",
 
-    linksTitle: "Links"
+    linksTitle: "Links",
+
+    footSource: "Quellcode",
+    footDisclaimer: "Haftungsausschluss",
+    footLicense: "Lizenz",
+    footPrivacy: "Datenschutz",
+    footTrademarks: "Marken",
+    footReport: "Fehler melden",
+    docClose: "Schliessen"
   },
 
   en: {
@@ -158,7 +166,15 @@ window.I18N = {
     dlLinuxTitle: "Download latest Linux build",
     dlCountTitle: "Downloads across all releases (app files, counted by GitHub)",
 
-    linksTitle: "Links"
+    linksTitle: "Links",
+
+    footSource: "Source",
+    footDisclaimer: "Disclaimer",
+    footLicense: "License",
+    footPrivacy: "Privacy",
+    footTrademarks: "Trademarks",
+    footReport: "Report an issue",
+    docClose: "Close"
   }
 };
 

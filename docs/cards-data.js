@@ -126,7 +126,12 @@ window.WEBPATCHER_BRANDS = [
       "GT3",
       "GT3 Max",
       "NT3 Pro",
-      "UT5 Max"
+      "UT5 Max",
+      "G5",
+      "GT5 Max",
+      "GT5 Pro",
+      "UT3 Max",
+      "NT3 Max"
     ]
   }
 ];

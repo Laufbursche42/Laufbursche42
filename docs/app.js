@@ -418,8 +418,53 @@ function init() {
   const y = $('year');
   if (y) y.textContent = new Date().getFullYear();
 
+  // Footer legal docs - small modal that fetches the matching markdown from docs/shared/.
+  document.querySelectorAll('[data-doc]').forEach((a) => {
+    a.addEventListener('click', (e) => { e.preventDefault(); openDoc(a.getAttribute('data-doc')); });
+  });
+  const dx = $('doc-x'); if (dx) dx.addEventListener('click', () => $('doc').close());
+  const dc = $('doc-close'); if (dc) dc.addEventListener('click', () => $('doc').close());
+
   applyLang();
   loadRepos();
+}
+
+// Minimal CommonMark subset: headings, paragraphs, bold/italic/code, links. Escapes everything
+// else, so a doc file cannot inject HTML. Enough for DISCLAIMER/LICENSE/PRIVACY/TRADEMARKS.
+function mdToHtml(md) {
+  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  const inline = (s) => esc(s)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  const lines = md.replace(/\r\n/g, '\n').split('\n');
+  const out = []; let para = [];
+  const flush = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
+  for (const ln of lines) {
+    const m = /^(#{1,6})\s+(.*)$/.exec(ln);
+    if (m) { flush(); const lvl = m[1].length; out.push('<h' + lvl + '>' + inline(m[2]) + '</h' + lvl + '>'); continue; }
+    if (/^\s*$/.test(ln)) { flush(); continue; }
+    para.push(ln.trim());
+  }
+  flush();
+  return out.join('\n');
+}
+
+function openDoc(key) {
+  const dlg = $('doc'); if (!dlg) return;
+  const title = { DISCLAIMER: 'footDisclaimer', LICENSE: 'footLicense', PRIVACY: 'footPrivacy', TRADEMARKS: 'footTrademarks' }[key] || key;
+  $('doc-title').textContent = t(title);
+  const body = $('doc-body'); body.textContent = '...';
+  const paths = lang === 'de' ? ['shared/' + key + '.DE.md', 'shared/' + key + '.md'] : ['shared/' + key + '.md'];
+  const tryNext = (i) => {
+    if (i >= paths.length) { body.textContent = ''; return; }
+    fetch(paths[i]).then((r) => r.ok ? r.text() : Promise.reject())
+      .then((txt) => { body.innerHTML = mdToHtml(txt); })  // scan-ok: mdToHtml escapes all input
+      .catch(() => tryNext(i + 1));
+  };
+  tryNext(0);
+  if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', '');
 }
 
 if (document.readyState === 'loading') {
