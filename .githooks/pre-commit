@@ -2,8 +2,9 @@
 #
 # pre-commit hook for github_my_page (adapted from the Laufbursche Edition hook).
 #
-#   Phase 0 - normalize Unicode dashes to ASCII '-' (auto-fix + re-stage).
-#   Phase A - syntax check every staged JS / HTML / JSON file.
+#   Phase 0  - normalize Unicode dashes to ASCII '-' (auto-fix + re-stage).
+#   Phase 0B - auto-bump the cache-buster (BUILD in docs/app.js + all ?v= in docs/index.html).
+#   Phase A  - syntax check every staged JS / HTML / JSON file.
 #   Phase B - scan staged content for secrets / credentials / Windows home paths.
 #   Phase C - personal-data / location-leak guard (OUT-OF-TREE blocklist).
 #   Phase D - web security scan (XSS/injection sinks, inline handlers, CSP, ...).
@@ -58,6 +59,34 @@ if [ -n "$dash_blocked" ]; then
   printf '%s' "$dash_blocked"
   echo "  -> stage the whole file (git add <file>) so the hook can normalize it, then re-commit."
   RC=1
+fi
+
+# =================================================================
+# PHASE 0B - auto-bump the cache-buster (BUILD in docs/app.js + all ?v= in docs/index.html)
+# =================================================================
+# No build step ships here, so a stale browser cache is the only thing between a tester and a fix.
+# Also lifts og:image + og-image.png references via the same ?v= so social-preview fetchers see
+# a fresh asset URL on every push.
+MAIN="docs/app.js"
+IDX="docs/index.html"
+if [ -f "$MAIN" ] && [ -f "$IDX" ] && grep -qE "BUILD *= *['\"]v[0-9]+['\"]" "$MAIN" \
+   && git diff --cached --name-only 2>/dev/null | grep -qE '^docs/.*\.(js|css|html|md)$'; then
+  OLD_B=$(git show HEAD:"$MAIN" 2>/dev/null | sed -nE "s/.*BUILD *= *['\"]v([0-9]+)['\"].*/\1/p" | head -1)
+  ST_B=$(git show :"$MAIN"       2>/dev/null | sed -nE "s/.*BUILD *= *['\"]v([0-9]+)['\"].*/\1/p" | head -1)
+  if [ -n "$OLD_B" ] && [ -n "$ST_B" ]; then
+    if [ "$ST_B" = "$OLD_B" ]; then NEW_B=$((OLD_B + 1)); else NEW_B="$ST_B"; fi
+    bump_block=0
+    for f in "$MAIN" "$IDX"; do
+      git diff --quiet -- "$f" 2>/dev/null && continue
+      echo "BLOCK: $f needs a cache-buster bump but also has UNSTAGED changes -> stage the whole file first."
+      RC=1; bump_block=1
+    done
+    if [ "$bump_block" -eq 0 ]; then
+      perl -i -pe "s/(BUILD\s*=\s*['\"])v[0-9]+(['\"])/\${1}v$NEW_B\${2}/" "$MAIN"; git add "$MAIN"
+      perl -i -pe "s/\?v=[0-9]+/?v=$NEW_B/g" "$IDX"; git add "$IDX"
+      echo "  auto-bumped cache-buster -> v$NEW_B ($MAIN + $IDX)"
+    fi
+  fi
 fi
 
 # =================================================================

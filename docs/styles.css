@@ -206,10 +206,26 @@ dialog#doc::backdrop { background: rgba(0,0,0,0.5); }
 dialog#doc .doc-head { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; border-bottom: 1px solid var(--line, #2c313b); }
 dialog#doc .doc-head h3 { margin: 0; font-size: 15px; }
 dialog#doc #doc-x { background: none; border: 0; color: var(--muted); font-size: 22px; line-height: 1; cursor: pointer; padding: 2px 8px; }
-dialog#doc .doc-body { padding: 14px; overflow: auto; max-height: 60vh; font-size: 14px; line-height: 1.55; }
-dialog#doc .doc-body h1, dialog#doc .doc-body h2, dialog#doc .doc-body h3 { margin: 10px 0 6px; }
-dialog#doc .doc-body p { margin: 6px 0; }
+dialog#doc .doc-body { padding: 14px 16px; overflow-y: auto; overscroll-behavior: contain; max-height: 60vh; font-size: 14px; line-height: 1.55; }
+dialog#doc .doc-body > :first-child { margin-top: 0; }
+dialog#doc .doc-body h1 { font-size: 16px; margin: 0 0 12px; color: var(--text, var(--fg, inherit)); }
+dialog#doc .doc-body h2 { font-size: 14px; margin: 22px 0 8px; color: var(--accent); }
+dialog#doc .doc-body h3, dialog#doc .doc-body h4 { font-size: 13.5px; margin: 16px 0 6px; color: var(--text, var(--fg, inherit)); }
+dialog#doc .doc-body p { margin: 0 0 11px; }
+dialog#doc .doc-body ul, dialog#doc .doc-body ol { margin: 0 0 12px; padding-left: 20px; }
+dialog#doc .doc-body li { margin-bottom: 5px; }
 dialog#doc .doc-body a { color: var(--accent); }
+dialog#doc .doc-body strong, dialog#doc .doc-body b { color: var(--text, var(--fg, inherit)); }
+dialog#doc .doc-body code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .88em; background: var(--head, #23272f); padding: 1px 5px; border-radius: 4px; }
+dialog#doc .doc-body pre { background: var(--head, #23272f); border: 1px solid var(--line, #2c313b); border-radius: 8px; padding: 10px 12px; margin: 0 0 12px; overflow-x: auto; }
+dialog#doc .doc-body pre code { background: none; padding: 0; font-size: 12px; line-height: 1.6; }
+dialog#doc .doc-body hr { border: 0; border-top: 1px solid var(--line, #2c313b); margin: 18px 0; }
+dialog#doc .doc-body table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 12px 0; }
+dialog#doc .doc-body th, dialog#doc .doc-body td { border: 1px solid var(--line, #2c313b); padding: 7px 9px; text-align: left; }
+dialog#doc .doc-body th { background: var(--head, #23272f); }
+dialog#doc .doc-body blockquote { margin: 0 0 12px; padding: 10px 12px; border-left: 3px solid var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); border-radius: 0 6px 6px 0; }
+dialog#doc .doc-body blockquote > :first-child { margin-top: 0; }
+dialog#doc .doc-body blockquote > :last-child { margin-bottom: 0; }
 dialog#doc .doc-foot { padding: 10px 14px; border-top: 1px solid var(--line, #2c313b); text-align: right; }
 dialog#doc .doc-foot button { background: var(--head, #23272f); color: var(--text, var(--fg, inherit)); border: 1px solid var(--line, #2c313b); padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; }
 dialog#doc .doc-foot button:hover { border-color: var(--accent); color: var(--accent); }

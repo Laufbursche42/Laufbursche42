@@ -10,6 +10,7 @@
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
+const BUILD = 'v1';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
 let lang = 'de';
@@ -68,17 +69,14 @@ function applyLang() {
   renderRepos(); // refresh loading/error text and button labels
 }
 
-// Contact paragraph: build the two links with DOM APIs, no innerHTML sink. The GitHub-issue
-// link opens a prefilled template so the reporter does not stare at an empty issue form.
-function renderContact() {
-  const p = $('about-contact'); if (!p) return;
-  p.textContent = '';
-  const mk = (href, label) => { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; return a; };
-  const isDe = (document.documentElement.getAttribute('lang') || 'en').toLowerCase() === 'de';
+// Build the GitHub-issue URL prefilled with page, URL, type checklist and a code-fenced log/screenshot slot.
+// Shared between the About-section contact link and the Footer "Report an issue" link.
+function buildIssueUrl() {
+  const isDe = lang === 'de';
   const F = String.fromCharCode(96, 96, 96);
-  const title = isDe ? '[laufbursche42.github.io] Rueckmeldung' : '[laufbursche42.github.io] Feedback';
+  const title = isDe ? '[laufbursche42.github.io] Rueckmeldung ' + BUILD : '[laufbursche42.github.io] Feedback ' + BUILD;
   const body = isDe
-    ? ['**Seite:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href,
+    ? ['**Seite:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href, '**Build:** ' + BUILD,
        '', '---', '',
        '**Worum geht es?**',
        '- [ ] Fehler / Bug',
@@ -88,7 +86,7 @@ function renderContact() {
        '', '**Beschreibung:**', '', '(bitte beschreiben)',
        '', '**Browser / System:**', '',
        '', '**Log oder Screenshot (optional):**', '', F, '', F].join('\n')
-    : ['**Page:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href,
+    : ['**Page:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href, '**Build:** ' + BUILD,
        '', '---', '',
        '**What is this about?**',
        '- [ ] Error / Bug',
@@ -98,12 +96,23 @@ function renderContact() {
        '', '**Description:**', '', '(please describe)',
        '', '**Browser / system:**', '',
        '', '**Log or screenshot (optional):**', '', F, '', F].join('\n');
-  const issueUrl = 'https://github.com/Laufbursche42/Laufbursche42/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
+  return 'https://github.com/Laufbursche42/Laufbursche42/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
+}
+
+// Contact paragraph: build the two links with DOM APIs, no innerHTML sink.
+function renderContact() {
+  const p = $('about-contact'); if (!p) return;
+  p.textContent = '';
+  const mk = (href, label) => { const a = document.createElement('a'); a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label; return a; };
+  const issueUrl = buildIssueUrl();
   p.appendChild(document.createTextNode(t('contactPre')));
   p.appendChild(mk('https://www.escooter-stammtisch.de/index.php?user/6497-laufbursche/', t('contactForum')));
   p.appendChild(document.createTextNode(t('contactMid')));
   p.appendChild(mk(issueUrl, t('contactIssue')));
   p.appendChild(document.createTextNode(t('contactPost')));
+  // Footer "Report an issue" uses the same prefill so a bug report never arrives blank.
+  const fr = $('link-report');
+  if (fr) fr.href = issueUrl;
 }
 
 function setLang(next) {
@@ -417,6 +426,8 @@ function init() {
 
   const y = $('year');
   if (y) y.textContent = new Date().getFullYear();
+  const bv = $('build-ver');
+  if (bv) bv.textContent = BUILD;
 
   // Footer legal docs - small modal that fetches the matching markdown from docs/shared/.
   document.querySelectorAll('[data-doc]').forEach((a) => {
@@ -429,25 +440,68 @@ function init() {
   loadRepos();
 }
 
-// Minimal CommonMark subset: headings, paragraphs, bold/italic/code, links. Escapes everything
-// else, so a doc file cannot inject HTML. Enough for DISCLAIMER/LICENSE/PRIVACY/TRADEMARKS.
-function mdToHtml(md) {
-  const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-  const inline = (s) => esc(s)
+// mdToHtml: same renderer as lb-tool-web (headings, paragraphs, lists, tables, blockquotes,
+// fenced code blocks, inline code/bold/links). Escapes everything, so a doc file cannot inject HTML.
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+function inlineMd(s) {
+  return s
+    .replace(/`([^`]+)`/g, function (m, c) { return '<code>' + c + '</code>'; })
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*([^*]+)\*/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-  const lines = md.replace(/\r\n/g, '\n').split('\n');
-  const out = []; let para = [];
-  const flush = () => { if (para.length) { out.push('<p>' + inline(para.join(' ')) + '</p>'); para = []; } };
-  for (const ln of lines) {
-    const m = /^(#{1,6})\s+(.*)$/.exec(ln);
-    if (m) { flush(); const lvl = m[1].length; out.push('<h' + lvl + '>' + inline(m[2]) + '</h' + lvl + '>'); continue; }
-    if (/^\s*$/.test(ln)) { flush(); continue; }
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+function mdToHtml(md) {
+  var codeBlocks = [];
+  md = String(md).replace(/```[^\n]*\n?([\s\S]*?)```/g, function (m, code) {
+    var i = codeBlocks.length;
+    codeBlocks.push('<pre><code>' + esc(code.replace(/\n$/, '')) + '</code></pre>');
+    return '\x00CB' + i + '\x00';
+  });
+  var lines = md.split(/\r?\n/);
+  var out = [], para = [], list = null;
+  function flushPara() { if (para.length) { out.push('<p>' + inlineMd(esc(para.join(' '))) + '</p>'); para = []; } }
+  function flushList() { if (list) { out.push('<' + list.type + '>' + list.items.join('') + '</' + list.type + '>'); list = null; } }
+  function isTableSep(s) { var tt = s.replace(/\s/g, ''); return /^\|?:?-+:?(\|:?-+:?)+\|?$/.test(tt); }
+  function splitRow(s) { return s.trim().replace(/^\|/, '').replace(/\|$/, '').split('|').map(function (c) { return c.trim(); }); }
+  for (var i = 0; i < lines.length; i++) {
+    var ln = lines[i];
+    var cb = ln.match(/^\x00CB(\d+)\x00$/);
+    if (cb) { flushPara(); flushList(); out.push(codeBlocks[Number(cb[1])]); continue; }
+    if (/^\s*$/.test(ln)) { flushPara(); flushList(); continue; }
+    var h = ln.match(/^(#{1,6})\s+(.*)$/);
+    if (h) { flushPara(); flushList(); var lvl = Math.min(h[1].length, 4); out.push('<h' + lvl + '>' + inlineMd(esc(h[2])) + '</h' + lvl + '>'); continue; }
+    if (/^---+$/.test(ln.trim())) { flushPara(); flushList(); out.push('<hr>'); continue; }
+    if (ln.indexOf('|') >= 0 && i + 1 < lines.length && isTableSep(lines[i + 1])) {
+      flushPara(); flushList();
+      var head = splitRow(ln); i++;
+      var body = '';
+      while (i + 1 < lines.length && lines[i + 1].indexOf('|') >= 0 && lines[i + 1].trim() !== '') {
+        body += '<tr>' + splitRow(lines[++i]).map(function (c) { return '<td>' + inlineMd(esc(c)) + '</td>'; }).join('') + '</tr>';
+      }
+      out.push('<table><thead><tr>' + head.map(function (c) { return '<th>' + inlineMd(esc(c)) + '</th>'; }).join('') + '</tr></thead><tbody>' + body + '</tbody></table>');
+      continue;
+    }
+    if (/^\s*>/.test(ln)) {
+      flushPara(); flushList();
+      var q = [];
+      while (i < lines.length && /^\s*>/.test(lines[i])) { q.push(lines[i].replace(/^\s*>\s?/, '')); i++; }
+      i--;
+      while (q.length && /^\s*$/.test(q[0])) q.shift();
+      while (q.length && /^\s*$/.test(q[q.length - 1])) q.pop();
+      if (q.length) out.push('<blockquote>' + mdToHtml(q.join('\n')) + '</blockquote>');
+      continue;
+    }
+    var ul = ln.match(/^\s*[-*]\s+(.*)$/);
+    var ol = ln.match(/^\s*\d+\.\s+(.*)$/);
+    if (ul || ol) {
+      flushPara();
+      var type = ul ? 'ul' : 'ol';
+      if (!list || list.type !== type) { flushList(); list = { type: type, items: [] }; }
+      list.items.push('<li>' + inlineMd(esc((ul ? ul[1] : ol[1]))) + '</li>');
+      continue;
+    }
     para.push(ln.trim());
   }
-  flush();
+  flushPara(); flushList();
   return out.join('\n');
 }
 

@@ -30,14 +30,17 @@ function toolBrands(reg) {
     // Some labels repeat the brand ("NIU KQi 300X", "IO HAWK Elite X 2.0"); the card shows the brand
     // in bold already, so strip a leading brand prefix to avoid doubling it.
     var re = new RegExp('^' + brand.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s+', 'i');
-    var lab = function (x) { return x.label.replace(re, ''); };
+    // The registry needs one entry per PID, so models sharing a name carry a " (PID)" suffix to tell
+    // them apart. The card only shows names, so drop the suffix and let the de-dup below collapse them.
+    var lab = function (x) { return x.label.replace(re, '').replace(/\s*\(\d{3,5}\)\s*$/, ''); };
+    var uniq = function (a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); };
     var models = m.models || [];
     // caps.bleSpeed === false = no BLE speed path -> "not supported" (SO6, SO4 UL, Trittbrett legacy).
     var isUnsup = function (x) { return x.caps && x.caps.bleSpeed === false; };
-    var unsupported = models.filter(isUnsup).map(lab);
+    var unsupported = uniq(models.filter(isUnsup).map(lab));
     var rest = models.filter(function (x) { return !isUnsup(x); });
-    var tested = rest.filter(function (x) { return x.tested; }).map(lab);
-    var untested = rest.filter(function (x) { return !x.tested; }).map(lab);
+    var tested = uniq(rest.filter(function (x) { return x.tested; }).map(lab));
+    var untested = uniq(rest.filter(function (x) { return !x.tested; }).map(lab));
     var o = { name: brand };
     o.models = tested;
     if (untested.length) o.untested = untested;
