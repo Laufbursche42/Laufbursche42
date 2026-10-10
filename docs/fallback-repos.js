@@ -4,7 +4,7 @@
 window.FALLBACK_REPOS = [
   {
     "name": "ap-unlock",
-    "description": "Laufbursche Edition Apollo (eKFV) unlock tool",
+    "description": "Laufbursche Edition Apollo unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -15,7 +15,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "augment-unlock",
-    "description": "Laufbursche Edition Augment (eKFV) unlock tool",
+    "description": "Laufbursche Edition Augment unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -26,7 +26,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "cityboss-unlock",
-    "description": "Laufbursche CITYBOSS unlock tool (eKFV)",
+    "description": "Laufbursche Edition CITYBOSS unlock tool",
     "language": "CSS",
     "stargazers_count": 0,
     "hasPages": true,
@@ -37,7 +37,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "dualtron-unlock",
-    "description": "Laufbursche Edition Dualtron (eKFV) unlock tool",
+    "description": "Laufbursche Edition Dualtron unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -48,7 +48,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "eg-unlock",
-    "description": "Laufbursche Edition EGRET (eKFV) unlock tool",
+    "description": "Laufbursche Edition EGRET unlock tool",
     "language": "JavaScript",
     "stargazers_count": 1,
     "hasPages": true,
@@ -59,7 +59,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "epf-unlock",
-    "description": "Laufbursche Edition ePF (eKFV) unlock tool",
+    "description": "Laufbursche Edition ePF unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -70,7 +70,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "etwow-unlock",
-    "description": "Laufbursche Edition E-TWOW (eKFV) unlock tool",
+    "description": "Laufbursche Edition E-TWOW unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -81,7 +81,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "hi-unlock",
-    "description": "Laufbursche Edition Hitway (eKFV) unlock tool",
+    "description": "Laufbursche Edition Hitway unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -103,7 +103,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "inokim-unlock",
-    "description": "Laufbursche Edition INOKIM (eKFV) unlock tool",
+    "description": "Laufbursche Edition INOKIM unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -114,7 +114,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "io-unlock",
-    "description": "Laufbursche Edition ioHawk (eKFV) unlock tool for newer models like Tuya-based Models, IO HAWK Elite X 2.0",
+    "description": "Laufbursche Edition ioHawk unlock tool for newer models like Tuya-based Models, IO HAWK Elite X 2.0",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -125,7 +125,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "iohawk-elite-x2-unlock",
-    "description": "Tastentrick-Boost für IOHawk Elite X2.0 (eKFV)",
+    "description": "Laufbursche Edition IOHawk Elite X2.0 unlock tool",
     "language": "CSS",
     "stargazers_count": 0,
     "hasPages": true,
@@ -136,7 +136,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "is-unlock",
-    "description": "Laufbursche Edition iScooter (eKFV) unlock tool",
+    "description": "Laufbursche Edition iScooter unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -147,7 +147,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "isinwheel-unlock",
-    "description": "Laufbursche Edition isinwheel (eKFV) unlock tool",
+    "description": "Laufbursche Edition isinwheel unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -158,7 +158,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "jo-unlock",
-    "description": "Laufbursche Edition Joyer (eKFV) unlock tool",
+    "description": "Laufbursche Edition Joyer unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -169,7 +169,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "kingsong-unlock",
-    "description": "Laufbursche Edition King Song (eKFV) unlock tool",
+    "description": "Laufbursche Edition King Song unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -180,7 +180,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "kukirin-unlock",
-    "description": "Laufbursche Edition Kukirin (eKFV) unlock tool",
+    "description": "Laufbursche Edition Kukirin unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -206,7 +206,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "mvagusta-unlock",
-    "description": "Laufbursche Edition MV Agusta (eKFV) unlock tool",
+    "description": "Laufbursche Edition MV Agusta unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -217,7 +217,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "niu-unlock",
-    "description": "Laufbursche Edition NIU (eKFV) unlock tool for newer models like KQi 300X,KQi2 Pro, KQi3 Max, KQi3 Pro, KQi3 Sport",
+    "description": "Laufbursche Edition NIU unlock tool for newer models like KQi 300X, KQi2 Pro, KQi3 Max, KQi3 Pro, KQi3 Sport",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -263,7 +263,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "nv-unlock",
-    "description": "Laufbursche Edition Navee (eKFV) unlock tool",
+    "description": "Laufbursche Edition Navee unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -274,7 +274,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "okai-unlock",
-    "description": "Laufbursche Edition OKAI (eKFV) unlock tool",
+    "description": "Laufbursche Edition OKAI unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -285,7 +285,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "pure-unlock",
-    "description": "Laufbursche Edition Pure (eKFV) unlock tool",
+    "description": "Laufbursche Edition Pure unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -296,7 +296,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "rcb-unlock",
-    "description": "Laufbursche Edition RCB (eKFV) unlock tool",
+    "description": "Laufbursche Edition RCB unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -320,7 +320,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "sf-unlock",
-    "description": "Laufbursche Edition SoFlow (eKFV) unlock tool",
+    "description": "Laufbursche Edition SoFlow unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -331,7 +331,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "streetbooster-unlock",
-    "description": "Laufbursche Edition STREETBOOSTER (eKFV) unlock tool",
+    "description": "Laufbursche Edition STREETBOOSTER unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -355,7 +355,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "tb-unlock",
-    "description": " Laufbursche Edition Trittbrett (eKFV) unlock tool",
+    "description": "Laufbursche Edition Trittbrett unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -401,7 +401,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "trbm-unlock",
-    "description": "Laufbursche Edition Teverun Blade Mini (eKFV) unlock tool",
+    "description": "Laufbursche Edition Teverun Blade Mini unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -412,7 +412,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "trfm-unlock",
-    "description": "Laufbursche Edition Teverun Fighter Mini (eKFV) unlock tool",
+    "description": "Laufbursche Edition Teverun Fighter Mini unlock tool",
     "language": "JavaScript",
     "stargazers_count": 2,
     "hasPages": true,
@@ -423,7 +423,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "vmax-new-unlock",
-    "description": "Laufbursche Edition vMAX (eKFV) unlock tool for newer models like VX2, VX4, new VX4, VX8, R40 Pro, R55 Pro",
+    "description": "Laufbursche Edition vMAX unlock tool for newer models like VX2, VX4, new VX4, VX8, R40 Pro, R55 Pro",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -434,7 +434,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "vmax-unlock",
-    "description": "Laufbursche Edition vMAX (eKFV) unlock tool for older Modules with HobbyWing/ZYD controller",
+    "description": "Laufbursche Edition vMAX unlock tool for older Modules with HobbyWing/ZYD controller",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -445,7 +445,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "vr-unlock",
-    "description": "Laufbursche Edition Viron (eKFV) unlock tool",
+    "description": "Laufbursche Edition Viron unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
   },
   {
     "name": "zero-unlock",
-    "description": "Laufbursche Edition Zero (eKFV) unlock tool",
+    "description": "Laufbursche Edition Zero unlock tool",
     "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
