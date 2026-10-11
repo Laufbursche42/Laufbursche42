@@ -252,14 +252,14 @@ window.FALLBACK_REPOS = [
     "name": "nv-lb-edition",
     "description": "An Alternative Android APP for Navee E-Scooters",
     "language": "Java",
-    "stargazers_count": 7,
+    "stargazers_count": 8,
     "hasPages": false,
     "homepage": "",
     "archived": false,
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.65/nv-lb-edition-v1.0.65.apk"
     },
-    "dlCount": 728
+    "dlCount": 752
   },
   {
     "name": "nv-unlock",
@@ -397,7 +397,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.28/Laufbursche-Edition-v1.1.28.apk"
     },
-    "dlCount": 327
+    "dlCount": 329
   },
   {
     "name": "trbm-unlock",
