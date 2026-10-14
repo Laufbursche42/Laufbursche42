@@ -57,6 +57,7 @@ window.TOOL_BRANDS = [
     "name": "Teverun",
     "models": [
       "Blade Mini Ultra (eKFV)",
+      "Blade Mini Pro (eKFV)",
       "Fighter Mini PRO (eKFV)"
     ]
   },
