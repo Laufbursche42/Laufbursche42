@@ -27,7 +27,7 @@ window.FALLBACK_REPOS = [
   {
     "name": "cityboss-unlock",
     "description": "Laufbursche Edition CITYBOSS unlock tool",
-    "language": "CSS",
+    "language": "JavaScript",
     "stargazers_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/cityboss-unlock/",
@@ -257,9 +257,9 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.69/nv-lb-edition-v1.0.69.apk"
+      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.70/nv-lb-edition-v1.0.70.apk"
     },
-    "dlCount": 895
+    "dlCount": 917
   },
   {
     "name": "nv-unlock",
