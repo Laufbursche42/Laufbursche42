@@ -65,16 +65,17 @@ window.TOOL_BRANDS = [
     "name": "NAVEE",
     "models": [
       "XT5 Pro",
-      "XT5 Ultra",
       "XT5 Max",
       "UT5 Ultra X",
       "NT5 Ultra X",
       "NT5 Max",
       "NT5 Max+",
       "NT5 Ultra",
-      "NT5 Turbo"
+      "NT5 Turbo",
+      "UT5 Max"
     ],
     "untested": [
+      "XT5 Ultra",
       "ST3 Pro",
       "GT3 Pro",
       "ST3",
@@ -109,7 +110,6 @@ window.TOOL_BRANDS = [
       "UT3",
       "UT3 Max",
       "UT3 Pro",
-      "UT5 Max",
       "UT5 Ultra",
       "V25 Pro/V25i Pro",
       "V25/V25i",
@@ -155,7 +155,8 @@ window.WEBPATCHER_BRANDS = [
       "NT5 Max+",
       "NT5 Ultra",
       "NT5 Turbo",
-      "NT5 Ultra X"
+      "NT5 Ultra X",
+      "UT5 Max"
     ],
     "untested": [
       "XT5 Pro",
@@ -167,7 +168,6 @@ window.WEBPATCHER_BRANDS = [
       "GT3",
       "GT3 Max",
       "NT3 Pro",
-      "UT5 Max",
       "UT5 Ultra X",
       "G5",
       "GT5 Max",

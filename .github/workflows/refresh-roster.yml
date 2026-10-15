@@ -43,7 +43,9 @@ jobs:
             exit 0
           fi
           git config user.name  "Laufbursche42"
-          git config user.email "42+Laufbursche42@users.noreply.github.com"
-          git add docs/fallback-repos.js
-          git commit -m "chore: refresh fallback-repos.js [skip ci]"
+          git config user.email "265699245+Laufbursche42@users.noreply.github.com"
+          V=$(( $(git rev-list --count HEAD) + 1 ))
+          sed -i -E "s/\?v=[0-9]+/?v=$V/g" docs/index.html
+          git add docs/fallback-repos.js docs/index.html
+          git commit -m "chore: refresh roster + cache-bust v$V [skip ci]"
           git push
