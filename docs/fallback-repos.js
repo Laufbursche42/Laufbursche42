@@ -257,15 +257,15 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.70/nv-lb-edition-v1.0.70.apk"
+      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.71/nv-lb-edition-v1.0.71.apk"
     },
-    "dlCount": 917
+    "dlCount": 934
   },
   {
     "name": "nv-unlock",
     "description": "Laufbursche Edition Navee unlock tool",
     "language": "JavaScript",
-    "stargazers_count": 0,
+    "stargazers_count": 1,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-unlock/",
     "archived": false,
@@ -341,6 +341,17 @@ window.FALLBACK_REPOS = [
     "dlCount": 0
   },
   {
+    "name": "sw-unlock",
+    "description": "Laufbursche Edition Segway/Ninebot unlock tool",
+    "language": "JavaScript",
+    "stargazers_count": 0,
+    "hasPages": true,
+    "homepage": "https://laufbursche42.github.io/sw-unlock/",
+    "archived": false,
+    "downloads": null,
+    "dlCount": 0
+  },
+  {
     "name": "tb-lb-edition",
     "description": "An alternative Android APP for Trittbrett E-Scooters",
     "language": "Java",
@@ -397,7 +408,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.28/Laufbursche-Edition-v1.1.28.apk"
     },
-    "dlCount": 339
+    "dlCount": 343
   },
   {
     "name": "trbm-unlock",
