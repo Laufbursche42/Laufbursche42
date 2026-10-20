@@ -408,7 +408,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.29/Laufbursche-Edition-v1.1.29.apk"
     },
-    "dlCount": 382
+    "dlCount": 385
   },
   {
     "name": "trbm-unlock",
