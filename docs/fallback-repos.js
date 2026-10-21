@@ -257,15 +257,26 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.74/nv-lb-edition-v1.0.74.apk"
+      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.76/nv-lb-edition-v1.0.76.apk"
     },
-    "dlCount": 1192
+    "dlCount": 1204
+  },
+  {
+    "name": "nv-swd-recovery",
+    "description": "SWD Recovery Tool for Navee motor controllers for NT5 Max (9301), NT3 Pro (12401), ST3 Pro (12501 + 3801), GT3 Pro (12601 + 3401), GT3 (3501), GT3 Max (3601), ST3 (3701) E-Scooters",
+    "language": "JavaScript",
+    "stargazers_count": 0,
+    "hasPages": true,
+    "homepage": "https://laufbursche42.github.io/nv-swd-recovery/",
+    "archived": false,
+    "downloads": null,
+    "dlCount": 0
   },
   {
     "name": "nv-unlock",
     "description": "Laufbursche Edition Navee unlock tool",
     "language": "JavaScript",
-    "stargazers_count": 1,
+    "stargazers_count": 2,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-unlock/",
     "archived": false,
@@ -316,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.14/sf-lb-edition-v1.0.14.apk"
     },
-    "dlCount": 177
+    "dlCount": 180
   },
   {
     "name": "sf-unlock",
@@ -408,7 +419,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.29/Laufbursche-Edition-v1.1.29.apk"
     },
-    "dlCount": 393
+    "dlCount": 395
   },
   {
     "name": "trbm-unlock",
