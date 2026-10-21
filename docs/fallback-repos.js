@@ -230,7 +230,7 @@ window.FALLBACK_REPOS = [
     "name": "niu-update",
     "description": "Update NIU E-Scooters with US/EU/DE Firmware",
     "language": "JavaScript",
-    "stargazers_count": 0,
+    "stargazers_count": 1,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/niu-update/",
     "archived": true,
@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.76/nv-lb-edition-v1.0.76.apk"
     },
-    "dlCount": 1204
+    "dlCount": 1225
   },
   {
     "name": "nv-swd-recovery",
@@ -327,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.14/sf-lb-edition-v1.0.14.apk"
     },
-    "dlCount": 180
+    "dlCount": 182
   },
   {
     "name": "sf-unlock",
