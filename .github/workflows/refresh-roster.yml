@@ -13,6 +13,15 @@ on:
     - cron: '*/15 * * * *'
   push:
     branches: [main]
+    paths-ignore:
+      # This workflow's own refresh commit only touches these generated files. Ignoring them stops the
+      # bot push from re-triggering the workflow (self-loop). The old loop-breaker was a CI-skip marker in
+      # the commit message, but Cloudflare Pages honours that marker too and then never deployed the update.
+      # The schedule + workflow_dispatch below still drive every refresh.
+      - 'docs/fallback-repos.js'
+      - 'docs/index.html'
+      - 'docs/app.js'
+      - 'docs/cards-data.js'
   workflow_dispatch:
 
 permissions:
@@ -53,5 +62,5 @@ jobs:
           sed -i -E "s/\?v=[0-9]+/?v=$V/g" docs/index.html
           sed -i -E "s/(BUILD[[:space:]]*=[[:space:]]*['\"])v[0-9]+(['\"])/\1v$V\2/" docs/app.js
           git add docs/fallback-repos.js docs/index.html docs/app.js
-          git commit -m "chore: refresh roster + cache-bust v$V [skip ci]"
+          git commit -m "chore: refresh roster + cache-bust v$V"
           git push
