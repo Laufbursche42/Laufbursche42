@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # full history -> git rev-list --count = the real commit count (cache-buster uses the same source as the build version; a shallow clone made ?v= a constant v2)
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -44,8 +46,12 @@ jobs:
           fi
           git config user.name  "Laufbursche42"
           git config user.email "265699245+Laufbursche42@users.noreply.github.com"
+          # Cache-buster V = git commit count (+1 for this commit) - the SAME source as the Android build
+          # version. fetch-depth:0 above makes this the real count, so ?v= + BUILD rise monotonically and
+          # the browser/CDN always refetch; the old shallow clone pinned it to a constant v2.
           V=$(( $(git rev-list --count HEAD) + 1 ))
           sed -i -E "s/\?v=[0-9]+/?v=$V/g" docs/index.html
-          git add docs/fallback-repos.js docs/index.html
+          sed -i -E "s/(BUILD[[:space:]]*=[[:space:]]*['\"])v[0-9]+(['\"])/\1v$V\2/" docs/app.js
+          git add docs/fallback-repos.js docs/index.html docs/app.js
           git commit -m "chore: refresh roster + cache-bust v$V [skip ci]"
           git push

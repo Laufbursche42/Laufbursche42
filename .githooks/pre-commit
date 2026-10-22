@@ -71,10 +71,10 @@ MAIN="docs/app.js"
 IDX="docs/index.html"
 if [ -f "$MAIN" ] && [ -f "$IDX" ] && grep -qE "BUILD *= *['\"]v[0-9]+['\"]" "$MAIN" \
    && git diff --cached --name-only 2>/dev/null | grep -qE '^docs/.*\.(js|css|html|md)$'; then
-  OLD_B=$(git show HEAD:"$MAIN" 2>/dev/null | sed -nE "s/.*BUILD *= *['\"]v([0-9]+)['\"].*/\1/p" | head -1)
-  ST_B=$(git show :"$MAIN"       2>/dev/null | sed -nE "s/.*BUILD *= *['\"]v([0-9]+)['\"].*/\1/p" | head -1)
-  if [ -n "$OLD_B" ] && [ -n "$ST_B" ]; then
-    if [ "$ST_B" = "$OLD_B" ]; then NEW_B=$((OLD_B + 1)); else NEW_B="$ST_B"; fi
+  # Cache-buster = git commit count (+1 for the commit being created) - the SAME source the refresh-roster
+  # CI workflow and the Android build version use, so the hook and CI never fight over the number.
+  NEW_B=$(( $(git rev-list --count HEAD 2>/dev/null || echo 0) + 1 ))
+  if [ -n "$NEW_B" ]; then
     bump_block=0
     for f in "$MAIN" "$IDX"; do
       git diff --quiet -- "$f" 2>/dev/null && continue
