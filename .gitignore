@@ -1,0 +1,22 @@
+# Secrets / credentials - never commit (safety net; the pre-commit scan skips scripts/)
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.keystore
+*.jks
+*.p12
+*.base64.txt
+*token*.txt
+secrets.*
+
+# Dependencies / build output
+node_modules/
+
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

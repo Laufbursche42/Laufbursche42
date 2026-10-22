@@ -10,7 +10,7 @@
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
-const BUILD = 'v124';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
+const BUILD = 'v125';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
 let lang = 'de';
@@ -447,7 +447,12 @@ function inlineMd(s) {
   return s
     .replace(/`([^`]+)`/g, function (m, c) { return '<code>' + c + '</code>'; })
     .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, function (m, text, url) {
+      // text + url here are already esc()'d for &<> by the callers; the href still needs a scheme
+      // allowlist (only http(s)/mailto/anchor/relative) plus a quote-escape (esc leaves " intact).
+      var safe = /^(?:https?:|mailto:|#|\/|\.)/i.test(url) ? url.replace(/"/g, '&quot;') : '#';
+      return '<a href="' + safe + '" target="_blank" rel="noopener">' + text + '</a>';
+    });
 }
 function mdToHtml(md) {
   var codeBlocks = [];
