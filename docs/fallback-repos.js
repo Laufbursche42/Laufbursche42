@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.83/nv-lb-edition-v1.0.83.apk"
     },
-    "dlCount": 1459
+    "dlCount": 1483
   },
   {
     "name": "nv-swd-recovery",
@@ -327,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.16/sf-lb-edition-v1.0.16.apk"
     },
-    "dlCount": 208
+    "dlCount": 209
   },
   {
     "name": "sf-unlock",
@@ -373,7 +373,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.20/tb-lb-edition-v1.0.20.apk"
     },
-    "dlCount": 45
+    "dlCount": 46
   },
   {
     "name": "tb-unlock",
@@ -412,14 +412,14 @@ window.FALLBACK_REPOS = [
     "name": "tr-lb-edition",
     "description": "An alternative Android APP for Teverun E-Scooters",
     "language": "Java",
-    "stargazers_count": 4,
+    "stargazers_count": 5,
     "hasPages": false,
     "homepage": "",
     "archived": false,
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.30/Laufbursche-Edition-v1.1.30.apk"
     },
-    "dlCount": 423
+    "dlCount": 425
   },
   {
     "name": "trbm-unlock",
