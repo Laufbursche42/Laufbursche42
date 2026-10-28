@@ -4,7 +4,7 @@ This tool runs entirely in your browser. It has no backend and no accounts. This
 
 ## The short version
 
-The tool collects nothing. There are no accounts, no analytics, no telemetry, no tracking, no ads, no cookies and no third-party scripts. Nothing is ever sent to the author.
+The tool itself collects nothing about you or your scooter. There are no accounts, no ads, no cookies and no cross-site tracking, and your scooter data never leaves your device. The only exception is anonymous, cookieless access statistics from the host Cloudflare (see "Hosting and access statistics"); no personal profiles are built from it. Nothing about your scooter is ever sent to the author.
 
 ## What data the tool handles and where it stays
 
@@ -20,6 +20,7 @@ All of the following stays on your device and is never uploaded to this project:
 The tool makes a network connection in only one case:
 
 - **Loading the page.** Your browser fetches the static files from the host (see below).
+- **Anonymous access statistics.** On load the page includes a cookieless Cloudflare Web Analytics script that reports an anonymous, aggregated page view (see "Hosting and access statistics").
 
 Scooter data, telemetry, the serial or changed settings are never sent to this project. For some models the firmware button opens the matching patcher in a new tab; that is a separate page which connects over Bluetooth itself.
 

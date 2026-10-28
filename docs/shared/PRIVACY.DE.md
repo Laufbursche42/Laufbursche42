@@ -4,7 +4,7 @@ Dieses Werkzeug läuft vollständig in deinem Browser. Es hat kein eigenes Backe
 
 ## Kurzfassung
 
-Das Werkzeug sammelt nichts. Es gibt keine Konten, keine Analyse, keine Telemetrie, kein Tracking, keine Werbung, keine Cookies und keine Skripte von Dritten. Nichts wird jemals an den Autor gesendet.
+Das Werkzeug selbst sammelt nichts über dich oder deinen Scooter. Es gibt keine Konten, keine Werbung, keine Cookies und kein geräteübergreifendes Tracking, und deine Scooter-Daten verlassen nie dein Gerät. Die einzige Ausnahme ist eine anonyme, cookielose Zugriffsstatistik des Hosters Cloudflare (siehe „Hosting und Zugriffsstatistik"); daraus werden keine persönlichen Profile gebildet. Nichts über deinen Scooter wird jemals an den Autor gesendet.
 
 ## Welche Daten das Werkzeug verarbeitet und wo sie bleiben
 
@@ -20,6 +20,7 @@ Alles Folgende bleibt auf deinem Gerät und wird nicht an dieses Projekt hochgel
 Das Werkzeug stellt eine Netzwerkverbindung nur in einem Fall her:
 
 - **Laden der Seite.** Dein Browser holt die statischen Dateien vom Hoster (siehe unten).
+- **Anonyme Zugriffsstatistik.** Beim Laden bindet die Seite ein cookieloses Cloudflare-Web-Analytics-Skript ein, das einen anonymen, zusammengefassten Seitenaufruf meldet (siehe „Hosting und Zugriffsstatistik").
 
 Scooter-Daten, Telemetrie, die Seriennummer oder geänderte Einstellungen werden in keinem Fall an dieses Projekt gesendet. Für einzelne Modelle öffnet der Firmware-Button den passenden Patcher in einem neuen Tab; das ist eine eigene Seite, die sich selbst über Bluetooth verbindet.
 
