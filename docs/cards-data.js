@@ -73,6 +73,7 @@ window.TOOL_BRANDS = [
       "NT5 Max+",
       "NT5 Ultra",
       "NT5 Turbo",
+      "N65i II",
       "UT5 Max"
     ],
     "untested": [
@@ -96,7 +97,6 @@ window.TOOL_BRANDS = [
       "K100 Max",
       "K100 Pro",
       "N65i",
-      "N65i II",
       "NT3 Max",
       "NT3 Pro",
       "S2",
@@ -150,7 +150,8 @@ window.WEBPATCHER_BRANDS = [
       "NT5 Ultra",
       "NT5 Turbo",
       "NT5 Ultra X",
-      "XT5 Ultra"
+      "XT5 Ultra",
+      "N65i II"
     ],
     "untested": [
       "XT5 Pro",
@@ -171,7 +172,6 @@ window.WEBPATCHER_BRANDS = [
       "G5 Max",
       "G5 Pro",
       "V45i",
-      "N65i II",
       "E20 Lite",
       "E25 Go",
       "V25 / V25i",
