@@ -73,6 +73,7 @@ window.TOOL_BRANDS = [
       "NT5 Max+",
       "NT5 Ultra",
       "NT5 Turbo",
+      "GT3 Max",
       "N65i II",
       "UT5 Max"
     ],
@@ -81,7 +82,6 @@ window.TOOL_BRANDS = [
       "GT3 Pro",
       "ST3",
       "GT3",
-      "GT3 Max",
       "E20",
       "E20 Lite",
       "E25",
@@ -151,6 +151,7 @@ window.WEBPATCHER_BRANDS = [
       "NT5 Turbo",
       "NT5 Ultra X",
       "XT5 Ultra",
+      "GT3 Max",
       "N65i II"
     ],
     "untested": [
@@ -160,7 +161,6 @@ window.WEBPATCHER_BRANDS = [
       "GT3 Pro",
       "ST3",
       "GT3",
-      "GT3 Max",
       "NT3 Pro",
       "UT5 Max",
       "UT5 Ultra X",
