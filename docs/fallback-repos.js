@@ -417,7 +417,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.33/Laufbursche-Edition-v1.1.33.apk"
+      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.34/Laufbursche-Edition-v1.1.34.apk"
     },
     "dlCount": 495
   },
