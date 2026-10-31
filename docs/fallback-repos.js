@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.95/nv-lb-edition-v1.0.95.apk"
     },
-    "dlCount": 1898
+    "dlCount": 1899
   },
   {
     "name": "nv-swd-recovery",
@@ -325,7 +325,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.18/sf-lb-edition-v1.0.18.apk"
+      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.19/sf-lb-edition-v1.0.19.apk"
     },
     "dlCount": 251
   },
