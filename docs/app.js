@@ -10,7 +10,7 @@
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
-const BUILD = 'v204';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
+const BUILD = 'v205';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
 let lang = 'de';
@@ -74,7 +74,7 @@ function applyLang() {
 function buildIssueUrl() {
   const isDe = lang === 'de';
   const F = String.fromCharCode(96, 96, 96);
-  const title = isDe ? '[laufbursche42.github.io] Rueckmeldung ' + BUILD : '[laufbursche42.github.io] Feedback ' + BUILD;
+  const title = isDe ? '[laufbursche42.github.io] Rückmeldung ' + BUILD : '[laufbursche42.github.io] Feedback ' + BUILD;
   const body = isDe
     ? ['**Seite:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href, '**Build:** ' + BUILD,
        '', '---', '',
