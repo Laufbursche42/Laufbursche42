@@ -325,7 +325,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.19/sf-lb-edition-v1.0.19.apk"
+      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.20/sf-lb-edition-v1.0.20.apk"
     },
     "dlCount": 266
   },
