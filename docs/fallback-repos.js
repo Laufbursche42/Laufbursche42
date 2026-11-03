@@ -202,7 +202,7 @@ window.FALLBACK_REPOS = [
       "mac": "https://github.com/Laufbursche42/leat/releases/download/v0.1.5/leat-macos",
       "win": "https://github.com/Laufbursche42/leat/releases/download/v0.1.5/leat.exe"
     },
-    "dlCount": 27
+    "dlCount": 28
   },
   {
     "name": "mvagusta-unlock",
@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.98/nv-lb-edition-v1.0.98.apk"
     },
-    "dlCount": 2067
+    "dlCount": 2098
   },
   {
     "name": "nv-swd-recovery",
@@ -327,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.21/sf-lb-edition-v1.0.21.apk"
     },
-    "dlCount": 275
+    "dlCount": 280
   },
   {
     "name": "sf-unlock",
@@ -373,7 +373,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.22/tb-lb-edition-v1.0.22.apk"
     },
-    "dlCount": 72
+    "dlCount": 74
   },
   {
     "name": "tb-unlock",
@@ -419,7 +419,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.40/Laufbursche-Edition-v1.1.40.apk"
     },
-    "dlCount": 553
+    "dlCount": 557
   },
   {
     "name": "trbm-unlock",
