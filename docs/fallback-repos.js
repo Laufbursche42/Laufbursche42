@@ -251,13 +251,13 @@ window.FALLBACK_REPOS = [
   {
     "name": "nv-lb-edition",
     "description": "An Alternative Android APP for Navee E-Scooters",
-    "language": "Java",
+    "language": "HTML",
     "stargazers_count": 10,
     "hasPages": false,
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.97/nv-lb-edition-v1.0.97.apk"
+      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.98/nv-lb-edition-v1.0.98.apk"
     },
     "dlCount": 2067
   },
