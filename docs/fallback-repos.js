@@ -327,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.19/sf-lb-edition-v1.0.19.apk"
     },
-    "dlCount": 265
+    "dlCount": 266
   },
   {
     "name": "sf-unlock",
@@ -419,7 +419,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.38/Laufbursche-Edition-v1.1.38.apk"
     },
-    "dlCount": 545
+    "dlCount": 547
   },
   {
     "name": "trbm-unlock",
