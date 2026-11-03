@@ -10,7 +10,7 @@
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
-const BUILD = 'v226';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
+const BUILD = 'v227';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
 let lang = 'de';
