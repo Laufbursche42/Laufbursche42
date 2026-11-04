@@ -325,7 +325,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.22/sf-lb-edition-v1.0.22.apk"
+      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.23/sf-lb-edition-v1.0.23.apk"
     },
     "dlCount": 291
   },
@@ -373,7 +373,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.24/tb-lb-edition-v1.0.24.apk"
     },
-    "dlCount": 75
+    "dlCount": 76
   },
   {
     "name": "tb-unlock",
