@@ -259,7 +259,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.100/nv-lb-edition-v1.0.100.apk"
     },
-    "dlCount": 2111
+    "dlCount": 2159
   },
   {
     "name": "nv-swd-recovery",
@@ -327,7 +327,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.22/sf-lb-edition-v1.0.22.apk"
     },
-    "dlCount": 284
+    "dlCount": 290
   },
   {
     "name": "sf-unlock",
@@ -419,7 +419,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.41/Laufbursche-Edition-v1.1.41.apk"
     },
-    "dlCount": 565
+    "dlCount": 570
   },
   {
     "name": "trbm-unlock",
