@@ -42,25 +42,44 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Regenerate docs/fallback-repos.js
+      - name: Regenerate, commit and push
+        # The concurrency group above should serialize runs, but overlapping schedule/push/dispatch
+        # triggers can still race the final push (two runs edit the same ?v=/BUILD cache lines, so a
+        # plain rebase would conflict). Instead of failing, each attempt rebuilds on the very latest
+        # main and pushes; if another run pushed in between (non-fast-forward), we reset to the new tip
+        # and retry. This keeps the roster fresh without the recurring "failed to push some refs" emails.
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/gen-fallback.js
-
-      - name: Commit if changed
         run: |
-          if git diff --quiet -- docs/fallback-repos.js; then
-            echo "no change"
-            exit 0
-          fi
           git config user.name  "Laufbursche42"
           git config user.email "265699245+Laufbursche42@users.noreply.github.com"
-          # Cache-buster V = git commit count (+1 for this commit) - the SAME source as the Android build
-          # version. fetch-depth:0 above makes this the real count, so ?v= + BUILD rise monotonically and
-          # the browser/CDN always refetch; the old shallow clone pinned it to a constant v2.
-          V=$(( $(git rev-list --count HEAD) + 1 ))
-          sed -i -E "s/\?v=[0-9]+/?v=$V/g" docs/index.html
-          sed -i -E "s/(BUILD[[:space:]]*=[[:space:]]*['\"])v[0-9]+(['\"])/\1v$V\2/" docs/app.js
-          git add docs/fallback-repos.js docs/index.html docs/app.js
-          git commit -m "chore: refresh roster + cache-bust v$V"
-          git push
+          result=""
+          for attempt in 1 2 3 4 5; do
+            git fetch --quiet origin main
+            git reset --hard --quiet origin/main
+            node scripts/gen-fallback.js
+            if git diff --quiet -- docs/fallback-repos.js; then
+              echo "no roster change (attempt $attempt)"
+              result="nochange"
+              break
+            fi
+            # Cache-buster V = git commit count (+1 for this commit) - the SAME source as the Android build
+            # version. fetch-depth:0 above makes this the real count, so ?v= + BUILD rise monotonically and
+            # the browser/CDN always refetch; the old shallow clone pinned it to a constant v2.
+            V=$(( $(git rev-list --count HEAD) + 1 ))
+            sed -i -E "s/\?v=[0-9]+/?v=$V/g" docs/index.html
+            sed -i -E "s/(BUILD[[:space:]]*=[[:space:]]*['\"])v[0-9]+(['\"])/\1v$V\2/" docs/app.js
+            git add docs/fallback-repos.js docs/index.html docs/app.js
+            git commit -m "chore: refresh roster + cache-bust v$V"
+            if git push origin HEAD:main; then
+              echo "pushed on attempt $attempt"
+              result="pushed"
+              break
+            fi
+            echo "push rejected (attempt $attempt) - another run pushed first; rebuilding on latest main"
+            sleep $(( (RANDOM % 4) + 2 ))
+          done
+          if [ -z "$result" ]; then
+            echo "still failing after retries"
+            exit 1
+          fi
