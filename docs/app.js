@@ -154,6 +154,26 @@ function dlIcon() {
   return svg;
 }
 
+// Small inline fork icon (SVG, inherits currentColor; no innerHTML sink).
+function forkIcon() {
+  const NS = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(NS, 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('width', '12'); svg.setAttribute('height', '12');
+  svg.setAttribute('fill', 'none'); svg.setAttribute('stroke', 'currentColor');
+  svg.setAttribute('stroke-width', '2.2'); svg.setAttribute('stroke-linecap', 'round');
+  svg.setAttribute('stroke-linejoin', 'round'); svg.setAttribute('aria-hidden', 'true');
+  [[6, 5], [18, 5], [12, 19]].forEach(([cx, cy]) => {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', cx); c.setAttribute('cy', cy); c.setAttribute('r', '2.2');
+    svg.appendChild(c);
+  });
+  const p = document.createElementNS(NS, 'path');
+  p.setAttribute('d', 'M6 7v3a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 13v3.8');
+  svg.appendChild(p);
+  return svg;
+}
+
 // repo data state so a language switch can re-render.
 let repoState = { status: 'loading', repos: [] };
 let repoQuery = '';
@@ -240,6 +260,15 @@ function repoCard(r) {
     star.className = 'repo-star';
     star.textContent = '★ ' + r.stargazers_count;
     top.appendChild(star);
+  }
+  if (r.forks_count > 0) {
+    const fork = document.createElement('span');
+    fork.className = 'repo-fork';
+    fork.appendChild(forkIcon());
+    const fnum = document.createElement('span');
+    fnum.textContent = r.forks_count.toLocaleString(lang === 'de' ? 'de-DE' : 'en-US');
+    fork.appendChild(fnum);
+    top.appendChild(fork);
   }
   if (r.dlCount > 0) {
     const dl = document.createElement('span');

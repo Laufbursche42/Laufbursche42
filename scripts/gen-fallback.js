@@ -57,6 +57,7 @@ const repos = base.map((x) => {
     description: x.description || '',
     language: x.language || '',
     stargazers_count: x.stargazers_count || 0,
+    forks_count: x.forks_count || 0,
     hasPages: !!x.has_pages,
     homepage: x.homepage || '',
     archived: !!x.archived,
