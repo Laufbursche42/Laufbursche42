@@ -371,7 +371,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.24/tb-lb-edition-v1.0.24.apk"
+      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.25/tb-lb-edition-v1.0.25.apk"
     },
     "dlCount": 76
   },
@@ -417,7 +417,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.42/Laufbursche-Edition-v1.1.42.apk"
+      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.43/Laufbursche-Edition-v1.1.43.apk"
     },
     "dlCount": 582
   },
