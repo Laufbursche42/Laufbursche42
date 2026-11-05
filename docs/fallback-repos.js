@@ -404,7 +404,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.25/tb-lb-edition-v1.0.25.apk"
+      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.26/tb-lb-edition-v1.0.26.apk"
     },
     "dlCount": 76
   },
