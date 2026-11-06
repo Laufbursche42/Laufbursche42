@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.104/nv-lb-edition-v1.0.104.apk"
     },
-    "dlCount": 2360
+    "dlCount": 2361
   },
   {
     "name": "nv-swd-recovery",
@@ -354,7 +354,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.25/sf-lb-edition-v1.0.25.apk"
+      "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.26/sf-lb-edition-v1.0.26.apk"
     },
     "dlCount": 326
   },
@@ -404,7 +404,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.26/tb-lb-edition-v1.0.26.apk"
+      "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.27/tb-lb-edition-v1.0.27.apk"
     },
     "dlCount": 79
   },
@@ -454,7 +454,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.44/Laufbursche-Edition-v1.1.44.apk"
+      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.45/Laufbursche-Edition-v1.1.45.apk"
     },
     "dlCount": 595
   },
