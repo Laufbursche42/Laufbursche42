@@ -280,7 +280,7 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.104/nv-lb-edition-v1.0.104.apk"
+      "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.105/nv-lb-edition-v1.0.105.apk"
     },
     "dlCount": 2361
   },
