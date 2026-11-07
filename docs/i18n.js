@@ -34,7 +34,7 @@ window.I18N = {
     webpatcherDesc: "Web-Bluetooth-Firmware-Patcher für mehrere Hersteller. Unterstützte Scooter je Marke:",
     webpatcherOpen: "Zum Tool",
     webpatcherOpenTitle: "Laufbursche Webpatcher öffnen",
-    overviewDesc: "Übersicht aller unterstützten Scooter mit Status je Thema (Verbindung, Unlock, Firmware) und Link zum passenden Tool.",
+    overviewDesc: "Datenblatt-Übersicht vieler E-Scooter-Modelle mit technischen Specs, recherchiert aus Hersteller- und Händlerquellen.",
     overviewOpen: "Zur Liste",
     overviewOpenTitle: "Laufbursche Scooter-Liste öffnen",
 
@@ -124,7 +124,7 @@ window.I18N = {
     webpatcherDesc: "Web Bluetooth firmware patcher for several manufacturers. Supported scooters per brand:",
     webpatcherOpen: "Open tool",
     webpatcherOpenTitle: "Open the Laufbursche Webpatcher",
-    overviewDesc: "Overview of all supported scooters with status per topic (connect, unlock, firmware) and a link to the matching tool.",
+    overviewDesc: "Datasheet overview of many e-scooter models with technical specs, researched from manufacturer and retailer sources.",
     overviewOpen: "Open list",
     overviewOpenTitle: "Open the Laufbursche Scooter list",
 
