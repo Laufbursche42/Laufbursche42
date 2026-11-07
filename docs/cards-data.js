@@ -154,8 +154,7 @@ window.WEBPATCHER_BRANDS = [
       "XT5 Ultra",
       "XT5 Max",
       "GT3 Max",
-      "UT5 Max",
-      "N65i II"
+      "UT5 Max"
     ],
     "untested": [
       "ST3 Pro",
@@ -174,6 +173,7 @@ window.WEBPATCHER_BRANDS = [
       "G5 Max",
       "G5 Pro",
       "V45i",
+      "N65i II",
       "E20 Lite",
       "E25 Go",
       "V25 / V25i",
