@@ -10,7 +10,7 @@
 
 const $ = (id) => document.getElementById(id);
 const GH_USER = 'Laufbursche42';
-const BUILD = 'v280';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
+const BUILD = 'v282';   // bumped on every commit by .githooks/pre-commit (sibling of ?v= on assets)
 const LS_THEME = 'lb_theme';
 const LS_LANG = 'lb_lang';
 let lang = 'de';
@@ -76,26 +76,26 @@ function buildIssueUrl() {
   const F = String.fromCharCode(96, 96, 96);
   const title = isDe ? '[laufbursche42.github.io] Rückmeldung ' + BUILD : '[laufbursche42.github.io] Feedback ' + BUILD;
   const body = isDe
-    ? ['**Seite:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href, '**Build:** ' + BUILD,
+    ? ['Seite: laufbursche42.github.io/Laufbursche42', 'URL: ' + location.href, 'Build: ' + BUILD,
        '', '---', '',
-       '**Worum geht es?**',
+       'Worum geht es?',
        '- [ ] Fehler / Bug',
        '- [ ] Vorschlag / Idee',
        '- [ ] Frage',
        '- [ ] Etwas anderes',
-       '', '**Beschreibung:**', '', '(bitte beschreiben)',
-       '', '**Browser / System:**', '',
-       '', '**Log oder Screenshot (optional):**', '', F, '', F].join('\n')
-    : ['**Page:** laufbursche42.github.io/Laufbursche42', '**URL:** ' + location.href, '**Build:** ' + BUILD,
+       '', 'Beschreibung:', '', '(bitte beschreiben)',
+       '', 'Browser / System:', '',
+       '', 'Log oder Screenshot (optional):', '', F, '', F].join('\n')
+    : ['Page: laufbursche42.github.io/Laufbursche42', 'URL: ' + location.href, 'Build: ' + BUILD,
        '', '---', '',
-       '**What is this about?**',
+       'What is this about?',
        '- [ ] Error / Bug',
        '- [ ] Suggestion / Idea',
        '- [ ] Question',
        '- [ ] Something else',
-       '', '**Description:**', '', '(please describe)',
-       '', '**Browser / system:**', '',
-       '', '**Log or screenshot (optional):**', '', F, '', F].join('\n');
+       '', 'Description:', '', '(please describe)',
+       '', 'Browser / system:', '',
+       '', 'Log or screenshot (optional):', '', F, '', F].join('\n');
   return 'https://github.com/Laufbursche42/Laufbursche42/issues/new?title=' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
 }
 
