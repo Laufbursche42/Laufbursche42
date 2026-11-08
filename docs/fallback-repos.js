@@ -142,7 +142,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/iohawk-elite-x2-unlock/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -254,7 +254,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/niu-update/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -266,7 +266,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-fw/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.117/nv-lb-edition-v1.0.117.apk"
     },
-    "dlCount": 2664
+    "dlCount": 2697
   },
   {
     "name": "nv-swd-recovery",
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.27/sf-lb-edition-v1.0.27.apk"
     },
-    "dlCount": 349
+    "dlCount": 352
   },
   {
     "name": "sf-unlock",
@@ -386,7 +386,7 @@ window.FALLBACK_REPOS = [
     "name": "sw-unlock",
     "description": "Laufbursche Edition Segway/Ninebot unlock tool",
     "language": "JavaScript",
-    "stargazers_count": 0,
+    "stargazers_count": 1,
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/sw-unlock/",
@@ -406,7 +406,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.28/tb-lb-edition-v1.0.28.apk"
     },
-    "dlCount": 82
+    "dlCount": 87
   },
   {
     "name": "tb-unlock",
@@ -428,7 +428,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/tr-blade-test/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -440,7 +440,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/tr-fw/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.46/Laufbursche-Edition-v1.1.46.apk"
     },
-    "dlCount": 617
+    "dlCount": 621
   },
   {
     "name": "trbm-unlock",
@@ -466,7 +466,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/trbm-unlock/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
@@ -478,7 +478,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/trfm-unlock/",
-    "archived": true,
+    "archived": false,
     "downloads": null,
     "dlCount": 0
   },
