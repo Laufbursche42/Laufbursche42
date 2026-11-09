@@ -242,7 +242,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/niu-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -266,7 +266,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-fw/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.119/nv-lb-edition-v1.0.119.apk"
     },
-    "dlCount": 2745
+    "dlCount": 2774
   },
   {
     "name": "nv-swd-recovery",
@@ -304,7 +304,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.28/sf-lb-edition-v1.0.28.apk"
     },
-    "dlCount": 357
+    "dlCount": 358
   },
   {
     "name": "sf-unlock",
@@ -366,7 +366,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/sf-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -416,7 +416,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/tb-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -440,7 +440,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/tr-fw/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.47/Laufbursche-Edition-v1.1.47.apk"
     },
-    "dlCount": 637
+    "dlCount": 648
   },
   {
     "name": "trbm-unlock",
@@ -466,7 +466,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/trbm-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
@@ -478,7 +478,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/trfm-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
