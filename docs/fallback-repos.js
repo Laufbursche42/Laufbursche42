@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.119/nv-lb-edition-v1.0.119.apk"
     },
-    "dlCount": 2741
+    "dlCount": 2745
   },
   {
     "name": "nv-swd-recovery",
