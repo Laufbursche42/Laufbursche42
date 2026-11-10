@@ -211,7 +211,7 @@ window.FALLBACK_REPOS = [
     "description": "Telemetry Data Charts for Laufbursche Edition APP route and ride recordings.",
     "language": "Go",
     "stargazers_count": 0,
-    "forks_count": 0,
+    "forks_count": 1,
     "hasPages": false,
     "homepage": "",
     "archived": false,
@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.119/nv-lb-edition-v1.0.119.apk"
     },
-    "dlCount": 2819
+    "dlCount": 2838
   },
   {
     "name": "nv-swd-recovery",
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.28/sf-lb-edition-v1.0.28.apk"
     },
-    "dlCount": 363
+    "dlCount": 368
   },
   {
     "name": "sf-unlock",
@@ -386,7 +386,7 @@ window.FALLBACK_REPOS = [
     "name": "sw-unlock",
     "description": "Laufbursche Edition Segway/Ninebot unlock tool",
     "language": "JavaScript",
-    "stargazers_count": 1,
+    "stargazers_count": 2,
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/sw-unlock/",
@@ -448,7 +448,7 @@ window.FALLBACK_REPOS = [
     "name": "tr-lb-edition",
     "description": "An alternative Android APP for Teverun E-Scooters",
     "language": "Java",
-    "stargazers_count": 5,
+    "stargazers_count": 6,
     "forks_count": 0,
     "hasPages": false,
     "homepage": "",
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.48/Laufbursche-Edition-v1.1.48.apk"
     },
-    "dlCount": 661
+    "dlCount": 665
   },
   {
     "name": "trbm-unlock",
