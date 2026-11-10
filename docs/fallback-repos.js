@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.119/nv-lb-edition-v1.0.119.apk"
     },
-    "dlCount": 2800
+    "dlCount": 2813
   },
   {
     "name": "nv-swd-recovery",
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.28/sf-lb-edition-v1.0.28.apk"
     },
-    "dlCount": 361
+    "dlCount": 362
   },
   {
     "name": "sf-unlock",
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.48/Laufbursche-Edition-v1.1.48.apk"
     },
-    "dlCount": 656
+    "dlCount": 659
   },
   {
     "name": "trbm-unlock",
@@ -486,7 +486,7 @@ window.FALLBACK_REPOS = [
     "name": "vmax-new-unlock",
     "description": "Laufbursche Edition vMAX unlock tool for newer models like VX2, VX4, new VX4, VX8, R40 Pro, R55 Pro",
     "language": "JavaScript",
-    "stargazers_count": 0,
+    "stargazers_count": 1,
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/vmax-new-unlock/",
