@@ -220,7 +220,7 @@ window.FALLBACK_REPOS = [
       "mac": "https://github.com/Laufbursche42/leat/releases/download/v0.1.5/leat-macos",
       "win": "https://github.com/Laufbursche42/leat/releases/download/v0.1.5/leat.exe"
     },
-    "dlCount": 30
+    "dlCount": 31
   },
   {
     "name": "mvagusta-unlock",
@@ -263,7 +263,7 @@ window.FALLBACK_REPOS = [
     "description": "Navee Firmware Patcher",
     "language": "JavaScript",
     "stargazers_count": 1,
-    "forks_count": 0,
+    "forks_count": 2,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/nv-fw/",
     "archived": true,
@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.119/nv-lb-edition-v1.0.119.apk"
     },
-    "dlCount": 2838
+    "dlCount": 2857
   },
   {
     "name": "nv-swd-recovery",
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.28/sf-lb-edition-v1.0.28.apk"
     },
-    "dlCount": 368
+    "dlCount": 370
   },
   {
     "name": "sf-unlock",
@@ -406,7 +406,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tb-lb-edition/releases/download/v1.0.29/tb-lb-edition-v1.0.29.apk"
     },
-    "dlCount": 91
+    "dlCount": 92
   },
   {
     "name": "tb-unlock",
@@ -456,7 +456,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.48/Laufbursche-Edition-v1.1.48.apk"
     },
-    "dlCount": 665
+    "dlCount": 673
   },
   {
     "name": "trbm-unlock",
