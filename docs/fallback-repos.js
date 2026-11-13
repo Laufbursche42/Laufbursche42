@@ -282,7 +282,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.125/nv-lb-edition-v1.0.125.apk"
     },
-    "dlCount": 3011
+    "dlCount": 3025
   },
   {
     "name": "nv-swd-recovery",
@@ -490,7 +490,7 @@ window.FALLBACK_REPOS = [
     "forks_count": 0,
     "hasPages": true,
     "homepage": "https://laufbursche42.github.io/vmax-new-unlock/",
-    "archived": false,
+    "archived": true,
     "downloads": null,
     "dlCount": 0
   },
