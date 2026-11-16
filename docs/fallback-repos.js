@@ -275,14 +275,14 @@ window.FALLBACK_REPOS = [
     "description": "An Alternative Android APP for Navee E-Scooters",
     "language": "HTML",
     "stargazers_count": 11,
-    "forks_count": 3,
+    "forks_count": 4,
     "hasPages": false,
     "homepage": "",
     "archived": false,
     "downloads": {
       "apk": "https://github.com/Laufbursche42/nv-lb-edition/releases/download/v1.0.127/nv-lb-edition-v1.0.127.apk"
     },
-    "dlCount": 3287
+    "dlCount": 3306
   },
   {
     "name": "nv-swd-recovery",
@@ -356,7 +356,7 @@ window.FALLBACK_REPOS = [
     "downloads": {
       "apk": "https://github.com/Laufbursche42/sf-lb-edition/releases/download/v1.0.30/sf-lb-edition-v1.0.30.apk"
     },
-    "dlCount": 396
+    "dlCount": 398
   },
   {
     "name": "sf-unlock",
@@ -454,9 +454,9 @@ window.FALLBACK_REPOS = [
     "homepage": "",
     "archived": false,
     "downloads": {
-      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.49/Laufbursche-Edition-v1.1.49.apk"
+      "apk": "https://github.com/Laufbursche42/tr-lb-edition/releases/download/v1.1.50/Laufbursche-Edition-v1.1.50.apk"
     },
-    "dlCount": 712
+    "dlCount": 713
   },
   {
     "name": "trbm-unlock",
